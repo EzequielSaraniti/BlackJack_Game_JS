@@ -8,6 +8,7 @@ let credito = 0;
 let apuestaJugador = 0;
 let manoUser = 0;
 let manoCrupier = 0;
+let cartasJugador = [];
 
 
 // Creamos Mazo de cartas con un ARRAY y Objetos dentro
@@ -425,6 +426,7 @@ function apuesta() {
     alert(`Tengo ${credito} en credito y ${apuestaJugador} es mi apuesta`)
     manoUser = 0;
     manoCrupier = 0;
+    cartasJugador = [];
     repartoInicialUser()
 };
 
@@ -443,10 +445,12 @@ function repartoInicialUser() {
     manoUser = manoUser + puntos;
 
     alert(`Obtuviste un ${puntos} de ${colorC}, sumas ${manoUser}`)
+    cartasJugador.push(mazo[cartaRandom])
 
     if (manoUser > 21) {
 
         alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
+        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
 
@@ -560,18 +564,21 @@ function repartoCrupier() {
 
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
         alert(`El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!!`)
+        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
     }
 
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
         alert(`El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`)
+        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) + parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
     }
 
     if (manoCrupier == manoUser) {
         alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
+        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         alert(`Tu saldo es de: ${credito} Dolares`);
     }
 
