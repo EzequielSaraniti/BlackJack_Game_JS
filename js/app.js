@@ -9,6 +9,7 @@ let apuestaJugador = 0;
 let manoUser = 0;
 let manoCrupier = 0;
 let cartasJugador = [];
+let manosJugadas= [];
 
 
 // Creamos Mazo de cartas con un ARRAY y Objetos dentro
@@ -380,9 +381,9 @@ const mazo = [{
     },
 
     {
-        valor: 10,
-        carta: "rey",
-        color: "pica",
+        valor: 1,
+        carta: "comodin",
+        color: "comodin",
         imagen: "imagen"
     }
 
@@ -427,7 +428,8 @@ function apuesta() {
     manoUser = 0;
     manoCrupier = 0;
     cartasJugador = [];
-    repartoInicialUser()
+    coloresObtenidos = [];
+    repartoInicialUser();
 };
 
 
@@ -439,6 +441,7 @@ function repartoInicialUser() {
 
     let puntos = 0;
 
+
     puntos = puntos + mazo[cartaRandom].valor
     let colorC = mazo[cartaRandom].color
 
@@ -446,13 +449,39 @@ function repartoInicialUser() {
 
     alert(`Obtuviste un ${puntos} de ${colorC}, sumas ${manoUser}`)
     cartasJugador.push(mazo[cartaRandom])
+    coloresObtenidos.push(colorC)
+
+    
+    // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
+    const findx = coloresObtenidos.find(function(comodin) {
+        return comodin == "comodin" 
+    })
+
+        if (findx == "comodin"){
+            alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
+            credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
+            alert(`Tu saldo es de: ${credito} Dolares`); 
+            manosJugadas.push("gane")
+        return apuesta()
+        } 
+    // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
+
 
     if (manoUser > 21) {
+        //Pusheamos la mano perdida
+        manosJugadas.push("perdi")
 
         alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
         alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
+
+        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
+        const manosPerdidas = manosJugadas.filter(function(mePase){
+            return mePase == "perdi"
+        })
+        alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
+        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
 
         let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
         seguirJugando = seguirJugando.toLocaleLowerCase()
@@ -567,6 +596,16 @@ function repartoCrupier() {
         alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
+
+        //Pusheamos la mano.
+        manosJugadas.push("perdi")
+
+        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
+        const manosPerdidas = manosJugadas.filter(function(perdi){
+            return perdi == "perdi"
+        })
+        alert(`Llevas: ${manosPerdidas.length} manos perdidas!!`);
+        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
     }
 
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
@@ -574,13 +613,34 @@ function repartoCrupier() {
         alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) + parseInt(apuestaJugador)
         alert(`Tu saldo es de: ${credito} Dolares`);
+
+        //Pusheamos la mano.
+        manosJugadas.push("gane")
+
+        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
+        const manosGanadas = manosJugadas.filter(function(gane){
+            return gane == "gane"
+        })
+        alert(`Llevas: ${manosGanadas.length} manos ganadas!!`);
+        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
 
     if (manoCrupier == manoUser) {
         alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
         alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         alert(`Tu saldo es de: ${credito} Dolares`);
+
+        //Pusheamos la mano.
+        manosJugadas.push("empate")
+
+        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
+        const manosEmpatadas = manosJugadas.filter(function(empate){
+            return empate == "empate"
+        })
+        alert(`Llevas: ${manosEmpatadas.length} manos empatadas!!`);
+        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
+
 
     let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
     seguirJugando = seguirJugando.toLocaleLowerCase()
