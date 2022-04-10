@@ -9,7 +9,7 @@ let apuestaJugador = 0;
 let manoUser = 0;
 let manoCrupier = 0;
 let cartasJugador = [];
-let manosJugadas= [];
+let manosJugadas = [];
 
 
 // Creamos Mazo de cartas con un ARRAY y Objetos dentro
@@ -451,19 +451,19 @@ function repartoInicialUser() {
     cartasJugador.push(mazo[cartaRandom])
     coloresObtenidos.push(colorC)
 
-    
+
     // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
-    const findx = coloresObtenidos.find(function(comodin) {
-        return comodin == "comodin" 
+    const findx = coloresObtenidos.find(function (comodin) {
+        return comodin == "comodin"
     })
 
-        if (findx == "comodin"){
-            alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
-            credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
-            alert(`Tu saldo es de: ${credito} Dolares`); 
-            manosJugadas.push("gane")
+    if (findx == "comodin") {
+        alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
+        credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
+        alert(`Tu saldo es de: ${credito} Dolares`);
+        manosJugadas.push("gane")
         return apuesta()
-        } 
+    }
     // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
 
 
@@ -477,7 +477,7 @@ function repartoInicialUser() {
         alert(`Tu saldo es de: ${credito} Dolares`);
 
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        const manosPerdidas = manosJugadas.filter(function(mePase){
+        const manosPerdidas = manosJugadas.filter(function (mePase) {
             return mePase == "perdi"
         })
         alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
@@ -601,7 +601,7 @@ function repartoCrupier() {
         manosJugadas.push("perdi")
 
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        const manosPerdidas = manosJugadas.filter(function(perdi){
+        const manosPerdidas = manosJugadas.filter(function (perdi) {
             return perdi == "perdi"
         })
         alert(`Llevas: ${manosPerdidas.length} manos perdidas!!`);
@@ -618,7 +618,7 @@ function repartoCrupier() {
         manosJugadas.push("gane")
 
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        const manosGanadas = manosJugadas.filter(function(gane){
+        const manosGanadas = manosJugadas.filter(function (gane) {
             return gane == "gane"
         })
         alert(`Llevas: ${manosGanadas.length} manos ganadas!!`);
@@ -634,7 +634,7 @@ function repartoCrupier() {
         manosJugadas.push("empate")
 
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        const manosEmpatadas = manosJugadas.filter(function(empate){
+        const manosEmpatadas = manosJugadas.filter(function (empate) {
             return empate == "empate"
         })
         alert(`Llevas: ${manosEmpatadas.length} manos empatadas!!`);
