@@ -1,8 +1,29 @@
 //Definimos el nombre del jugador
-const nombre = prompt("Bienvenido a la mesa de Blackjack, como es tu nombre?");
+//const nombre = prompt("Bienvenido a la mesa de Blackjack, como es tu nombre?");
+
+//document.getElementById('bienvenida').innerHTML = `<h2>Bienvenido ${nombre} al mejor Blackjack! Muchas suerte!</h2>`
 
 
-alert(`Hola ${nombre}, te deseo mucha suerte, a jugar!!`);
+let nombre = ""
+
+const btnJugar = document.getElementById('jugar')
+btnJugar.addEventListener('click', bienvenida)
+
+function bienvenida(){
+    nombre = document.getElementById('nombreUser').value
+    //console.log(nombre)
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Bienvenido ${nombre} te deseo mucha suerte!</h2>`
+    const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
+
+    //myDiv.className = "apareceContenido";
+    document.getElementById("aparece").style.visibility = "visible"; // show
+    document.getElementById("IngresoUser").style.display = "none"; // show
+
+    
+
+}
+//alert(`Hola ${nombre}, te deseo mucha suerte, a jugar!!`);
+
 
 let credito = 0;
 let apuestaJugador = 0;
@@ -13,7 +34,6 @@ let manosJugadas = [];
 
 
 // Creamos Mazo de cartas con un ARRAY y Objetos dentro
-
 
 // Color "Corazón"
 const mazo = [{
@@ -382,54 +402,72 @@ const mazo = [{
 
     {
         valor: 1,
-        carta: "comodin",
-        color: "comodin",
+        carta: "rey",
+        color: "pica",
         imagen: "imagen"
     }
 
 ]
 
 
-cargoCredito();
+//cargoCredito();
 
+const btnCargoCredito = document.getElementById('cargoCreditoBtn')
+btnCargoCredito.addEventListener('click', cargoCredito)
 
 
 function cargoCredito() {
+
+    if (credito > 0){
+        alert(`Solo podrás cargar saldo cuando el mismo séa U$0.`);
+    }
+
     //Cargamos crédito, si el usuario quiere usar String o numeros con comas, volverá al bucle
     while ((credito <= 0) | (credito != parseInt(credito))) {
 
-        credito = prompt("¿ Cuanto saldo quieres cargar ? Ej: 1000");
+        let creditoCarga = document.getElementById('cargoCredito').value
+
+        credito = credito + parseInt(creditoCarga)
 
         if (credito != parseInt(credito)) {
             alert(`Ingresaste un valor inválido`);
+            break
         } else
-            alert(`Tu saldo es de: ${credito} Dolares`);
-
-        apuesta();
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
+        document.getElementById("alertaCredito").style.display = "none"; // show
 
     }
 }
+
+const btnApuestaJugador = document.getElementById('apuestaJugadorBtn')
+btnApuestaJugador.addEventListener('click', apuesta)
 
 
 function apuesta() {
 
     if (credito <= 0) {
-        alert("Te quedaste sin saldo, a continuación podrás cargar salgo.")
+        alert("Te quedaste sin saldo, a continuación podrás cargar saldo.")
         cargoCredito()
     }
 
-    do {
-        apuestaJugador = parseInt(prompt("¿ Cuanto saldo quieres apostar ?"));
+    apuestaJugadorInp = document.getElementById('apuestaJugador').value
+    apuestaJugador = parseInt(apuestaJugadorInp)
+
+    if((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))){
+        alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar") 
+    }else{
 
 
-    } while ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador)))
-
-    alert(`Tengo ${credito} en credito y ${apuestaJugador} es mi apuesta`)
-    manoUser = 0;
-    manoCrupier = 0;
-    cartasJugador = [];
-    coloresObtenidos = [];
-    repartoInicialUser();
+        //alert(`Tengo ${credito} en credito y ${apuestaJugador} es mi apuesta`)
+        manoUser = 0;
+        manoCrupier = 0;
+        cartasJugador = [];
+        coloresObtenidos = [];
+        repartoInicialUser();
+        document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
+        document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
+        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
+}
 };
 
 
@@ -447,73 +485,95 @@ function repartoInicialUser() {
 
     manoUser = manoUser + puntos;
 
-    alert(`Obtuviste un ${puntos} de ${colorC}, sumas ${manoUser}`)
-    cartasJugador.push(mazo[cartaRandom])
-    coloresObtenidos.push(colorC)
+    let puntosX = document.getElementById('puntosPlayer').innerHTML =`<b>${manoUser}</b>`
+    let cartax = document.getElementById('cartasPlayer').innerHTML = `${puntos} de ${colorC}`
+
+    document.getElementById("pidoCarta").style.visibility = "visible"; // show
+    document.getElementById("noPido").style.visibility = "visible"; // show
+    //alert(`Obtuviste un ${puntos} de ${colorC}, sumas ${manoUser}`)
+    //cartasJugador.push(mazo[cartaRandom])
+    //coloresObtenidos.push(colorC)
 
 
     // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
-    const findx = coloresObtenidos.find(function (comodin) {
-        return comodin == "comodin"
-    })
+    //const findx = coloresObtenidos.find(function (comodin) {
+        //return comodin == "comodin"
+    //})
 
-    if (findx == "comodin") {
-        alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
-        credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
-        alert(`Tu saldo es de: ${credito} Dolares`);
-        manosJugadas.push("gane")
-        return apuesta()
-    }
+    // if (findx == "comodin") {
+    //     alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
+    //     credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
+    //     alert(`Tu saldo es de: ${credito} Dolares`);
+    //     manosJugadas.push("gane")
+    //     return apuesta()
+    // }
     // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
 
 
     if (manoUser > 21) {
         //Pusheamos la mano perdida
-        manosJugadas.push("perdi")
+        //manosJugadas.push("perdi")
 
-        alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
-        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares</b>`
+        //alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
+        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
-        alert(`Tu saldo es de: ${credito} Dolares`);
+        //alert(`Tu saldo es de: ${credito} Dolares`);
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        const manosPerdidas = manosJugadas.filter(function (mePase) {
-            return mePase == "perdi"
-        })
-        alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
+        //const manosPerdidas = manosJugadas.filter(function (mePase) {
+            //return mePase == "perdi"
+        //})
+        //alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
+        document.getElementById("pidoCarta").style.visibility = "hidden"; // show
+        document.getElementById("noPido").style.visibility = "hidden"; // show
+        document.getElementById("apuestaJugador").style.visibility = "visible"; // show
+        document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
-        let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
-        seguirJugando = seguirJugando.toLocaleLowerCase()
 
-        if (seguirJugando == "y") {
-            apuesta()
-        } else if (seguirJugando == "n") {
-            return
-        } else {
-            apuesta()
-        }
+        // let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
+        // seguirJugando = seguirJugando.toLocaleLowerCase()
+
+        // if (seguirJugando == "y") {
+        //     apuesta()
+        // } else if (seguirJugando == "n") {
+        //     return
+        // } else {
+        //     apuesta()
+        // }
     }
 
-    if (manoUser < 22) {
-        pedirOtraCarta()
-    }
+    //if (manoUser < 22) {
+        //pedirOtraCarta()
+    //}
 
 }
 
-function pedirOtraCarta() {
-    let pedirOtra = prompt("¿ Quieres pedir otra carta ? (Y/n)")
-    pedirOtra = pedirOtra.toLocaleLowerCase()
+const pedirCarta = document.getElementById('pidoCarta')
+pedirCarta.addEventListener('click', repartoInicialUser)
 
-    if (pedirOtra == "y") {
-        repartoInicialUser()
-    } else if (pedirOtra == "n") {
-        repartoCrupier()
-    } else {
-        repartoInicialUser()
-    }
+const noPedir = document.getElementById('noPido')
+noPedir.addEventListener('click', repartoCrupier)
 
-}
+//function pedirOtraCarta() {
+
+
+
+    //let pedirOtra = prompt("¿ Quieres pedir otra carta ? (Y/n)")
+    //pedirOtra = pedirOtra.toLocaleLowerCase()
+
+    // if (pedirOtra == "y") {
+    //     repartoInicialUser()
+    // } else if (pedirOtra == "n") {
+    //     repartoCrupier()
+    // } else {
+    //     repartoInicialUser()
+    // }
+
+//}
 
 function repartoCrupier() {
 
@@ -525,7 +585,7 @@ function repartoCrupier() {
         switch (cartaRandom) {
 
             case 0:
-                if ((manoUser + 11) < 22) {
+                if ((manoCrupier + 11) < 22) {
                     puntos = 11
                     break
                 }
@@ -592,64 +652,80 @@ function repartoCrupier() {
 
 
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
-        alert(`El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!!`)
-        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares</b>`
+        //alert(`El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!!`)
+        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
-        alert(`Tu saldo es de: ${credito} Dolares`);
+        //alert(`Tu saldo es de: ${credito} Dolares`);
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
         //Pusheamos la mano.
-        manosJugadas.push("perdi")
+        //manosJugadas.push("perdi")
 
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        const manosPerdidas = manosJugadas.filter(function (perdi) {
-            return perdi == "perdi"
-        })
-        alert(`Llevas: ${manosPerdidas.length} manos perdidas!!`);
+        // const manosPerdidas = manosJugadas.filter(function (perdi) {
+        //     return perdi == "perdi"
+        // })
+        // alert(`Llevas: ${manosPerdidas.length} manos perdidas!!`);
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
     }
 
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
-        alert(`El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`)
-        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!</b>`
+        //alert(`El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`)
+        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) + parseInt(apuestaJugador)
-        alert(`Tu saldo es de: ${credito} Dolares`);
+        //alert(`Tu saldo es de: ${credito} Dolares`);
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
         //Pusheamos la mano.
-        manosJugadas.push("gane")
+        //manosJugadas.push("gane")
 
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        const manosGanadas = manosJugadas.filter(function (gane) {
-            return gane == "gane"
-        })
-        alert(`Llevas: ${manosGanadas.length} manos ganadas!!`);
+        // const manosGanadas = manosJugadas.filter(function (gane) {
+        //     return gane == "gane"
+        // })
+        // alert(`Llevas: ${manosGanadas.length} manos ganadas!!`);
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
 
     if (manoCrupier == manoUser) {
-        alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
-        alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
-        alert(`Tu saldo es de: ${credito} Dolares`);
+        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!</b>`
+        //alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
+        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+        //alert(`Tu saldo es de: ${credito} Dolares`);
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
         //Pusheamos la mano.
-        manosJugadas.push("empate")
+        //manosJugadas.push("empate")
 
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        const manosEmpatadas = manosJugadas.filter(function (empate) {
-            return empate == "empate"
-        })
-        alert(`Llevas: ${manosEmpatadas.length} manos empatadas!!`);
+        // const manosEmpatadas = manosJugadas.filter(function (empate) {
+        //     return empate == "empate"
+        // })
+        // alert(`Llevas: ${manosEmpatadas.length} manos empatadas!!`);
         // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
 
+    document.getElementById("pidoCarta").style.visibility = "hidden"; // show
+    document.getElementById("noPido").style.visibility = "hidden"; // show
+    document.getElementById("apuestaJugador").style.visibility = "visible"; // show
+    document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
-    let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
-    seguirJugando = seguirJugando.toLocaleLowerCase()
+    // let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
+    // seguirJugando = seguirJugando.toLocaleLowerCase()
 
-    if (seguirJugando == "y") {
-        apuesta()
-    } else if (seguirJugando == "n") {
-        return
-    } else {
-        apuesta()
-    }
+    // if (seguirJugando == "y") {
+    //     apuesta()
+    // } else if (seguirJugando == "n") {
+    //     return
+    // } else {
+    //     apuesta()
+    // }
 }
