@@ -9,7 +9,7 @@ let nombre = ""
 const btnJugar = document.getElementById('jugar')
 btnJugar.addEventListener('click', bienvenida)
 
-function bienvenida(){
+function bienvenida() {
     nombre = document.getElementById('nombreUser').value
     //console.log(nombre)
     const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Bienvenido ${nombre} te deseo mucha suerte!</h2>`
@@ -19,7 +19,7 @@ function bienvenida(){
     document.getElementById("aparece").style.visibility = "visible"; // show
     document.getElementById("IngresoUser").style.display = "none"; // show
 
-    
+
 
 }
 //alert(`Hola ${nombre}, te deseo mucha suerte, a jugar!!`);
@@ -418,7 +418,7 @@ btnCargoCredito.addEventListener('click', cargoCredito)
 
 function cargoCredito() {
 
-    if (credito > 0){
+    if (credito > 0) {
         alert(`Solo podrás cargar saldo cuando el mismo séa U$0.`);
     }
 
@@ -433,7 +433,7 @@ function cargoCredito() {
             alert(`Ingresaste un valor inválido`);
             break
         } else
-        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
+            document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
         document.getElementById("alertaCredito").style.display = "none"; // show
 
     }
@@ -453,9 +453,9 @@ function apuesta() {
     apuestaJugadorInp = document.getElementById('apuestaJugador').value
     apuestaJugador = parseInt(apuestaJugadorInp)
 
-    if((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))){
-        alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar") 
-    }else{
+    if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))) {
+        alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar")
+    } else {
 
 
         //alert(`Tengo ${credito} en credito y ${apuestaJugador} es mi apuesta`)
@@ -467,7 +467,8 @@ function apuesta() {
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
         document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
-}
+        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b></b>`
+    }
 };
 
 
@@ -479,13 +480,16 @@ function repartoInicialUser() {
 
     let puntos = 0;
 
-
     puntos = puntos + mazo[cartaRandom].valor
     let colorC = mazo[cartaRandom].color
 
-    manoUser = manoUser + puntos;
+    if (puntos == 1 && manoUser + 11 < 22) {
+        manoUser = manoUser + 11
+    } else {
+        manoUser = manoUser + puntos;
+    }
 
-    let puntosX = document.getElementById('puntosPlayer').innerHTML =`<b>${manoUser}</b>`
+    let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b>${manoUser}</b>`
     let cartax = document.getElementById('cartasPlayer').innerHTML = `${puntos} de ${colorC}`
 
     document.getElementById("pidoCarta").style.visibility = "visible"; // show
@@ -497,7 +501,7 @@ function repartoInicialUser() {
 
     // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
     //const findx = coloresObtenidos.find(function (comodin) {
-        //return comodin == "comodin"
+    //return comodin == "comodin"
     //})
 
     // if (findx == "comodin") {
@@ -515,7 +519,7 @@ function repartoInicialUser() {
         //manosJugadas.push("perdi")
 
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares</b>`
         //alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
         //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
@@ -524,7 +528,7 @@ function repartoInicialUser() {
 
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
         //const manosPerdidas = manosJugadas.filter(function (mePase) {
-            //return mePase == "perdi"
+        //return mePase == "perdi"
         //})
         //alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
         // Agregamos filtrado de cartas, para saber cuantas manos perdimos
@@ -547,7 +551,7 @@ function repartoInicialUser() {
     }
 
     //if (manoUser < 22) {
-        //pedirOtraCarta()
+    //pedirOtraCarta()
     //}
 
 }
@@ -562,16 +566,16 @@ noPedir.addEventListener('click', repartoCrupier)
 
 
 
-    //let pedirOtra = prompt("¿ Quieres pedir otra carta ? (Y/n)")
-    //pedirOtra = pedirOtra.toLocaleLowerCase()
+//let pedirOtra = prompt("¿ Quieres pedir otra carta ? (Y/n)")
+//pedirOtra = pedirOtra.toLocaleLowerCase()
 
-    // if (pedirOtra == "y") {
-    //     repartoInicialUser()
-    // } else if (pedirOtra == "n") {
-    //     repartoCrupier()
-    // } else {
-    //     repartoInicialUser()
-    // }
+// if (pedirOtra == "y") {
+//     repartoInicialUser()
+// } else if (pedirOtra == "n") {
+//     repartoCrupier()
+// } else {
+//     repartoInicialUser()
+// }
 
 //}
 
@@ -653,8 +657,8 @@ function repartoCrupier() {
 
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
-        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares</b>`
+        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares</b>`
         //alert(`El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!!`)
         //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
@@ -674,8 +678,8 @@ function repartoCrupier() {
 
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
-        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!</b>`
+        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="verde">El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!</b>`
         //alert(`El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`)
         //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) + parseInt(apuestaJugador)
@@ -695,8 +699,8 @@ function repartoCrupier() {
 
     if (manoCrupier == manoUser) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
-        let puntosX = document.getElementById('puntosBanca').innerHTML =`<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML =`<b>El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!</b>`
+        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
+        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b>El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!</b>`
         //alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
         //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         //alert(`Tu saldo es de: ${credito} Dolares`);
