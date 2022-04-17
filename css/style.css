@@ -15,7 +15,9 @@
 
 html {
     background-color: green;
-    width: 462px;
+    display: flex;
+    justify-content: center;
+    
 }
 
 .letterWhite{
