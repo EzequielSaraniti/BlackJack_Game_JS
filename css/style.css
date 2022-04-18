@@ -71,7 +71,7 @@ h1 {
 #aparece {
     background-image: url(../img/mesa-blackjack.jpg);
     background-size:cover;
-    visibility: visible;
+    visibility: hidden;
     transition: all 2s;
     max-width: 492px;
     max-height: 381px;
