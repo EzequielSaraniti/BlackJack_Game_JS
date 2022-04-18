@@ -15,9 +15,6 @@
 
 html {
     background-color: rgb(0, 70, 0);
-    display: flex;
-    justify-content: center;
-
 }
 
 .letterWhite {
@@ -73,10 +70,13 @@ h1 {
 
 #aparece {
     background-image: url(../img/mesa-blackjack.jpg);
+    background-size:cover;
     visibility: visible;
     transition: all 2s;
-    width: 462px;
-    height: 341px;
+    max-width: 492px;
+    max-height: 381px;
+    width: auto;
+    height: auto;
 }
 
 .bienvenidoUser {
@@ -106,7 +106,27 @@ h4 {
 }
 
 .apuestaInput {
-    width: 5rem;
+    text-align: end;
+    background-color: rgb(66, 41, 11);
+    color: white;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-right: 5px;
+    width: 50px;
+    
+}
+
+#apuestaJugadorBtn{
+    text-align: center;
+    background-color: rgb(0, 13, 56);
+    color: white;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-right: 5px;
+    width: auto;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 0.9rem;
 }
 
 .elementosBanca {
@@ -124,6 +144,7 @@ h4 {
     border: solid rgba(161, 161, 161, 0.5) 1px;
     padding: 4px 15px 4px 4px;
     border-radius: 10px 10px 10px 10px;
+    color: white;
 }
 
 .puntosBanca {
@@ -134,26 +155,31 @@ h4 {
     border: solid rgba(161, 161, 161, 0.5) 1px;
     padding: 4px 15px 4px 4px;
     border-radius: 10px 10px 10px 10px;
+    color: white;
 }
 
 .cartasPlayer {
     margin-right: 30px;
     text-shadow: 1px 1px 2px black;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
     padding: 4px 15px 4px 4px;
     border-radius: 10px 10px 10px 10px;
+    color: white;
+    text-align: center;
 }
 
 .puntosPlayer {
     margin-right: 30px;
     text-shadow: 1px 1px 2px rgba(61, 61, 61, 0);
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
     padding: 4px 15px 4px 4px;
     border-radius: 10px 10px 10px 10px;
+    color: white;
+    text-align: center;
 }
 
 .elementosPlayer {
@@ -187,7 +213,7 @@ h4 {
     width: 140px;
     margin-right: 30px;
     text-shadow: 1px 1px 2px black;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
     padding: 4px 15px 4px 4px;
@@ -204,7 +230,6 @@ h4 {
 
 #MensajeFinal {
     visibility: hidden;
-    position: fixed;
     color: white;
     text-shadow: 1px 1px 2px black;
     background-color: rgba(0, 0, 0, 0.534);
@@ -212,8 +237,7 @@ h4 {
     border-radius: 10px 10px 10px 10px;
     font-size: 0.85rem;
     text-align: center;
-    width: 462px;
-    top: 430px;
+    
 }
 
 .rojo {
@@ -223,3 +247,44 @@ h4 {
 .verde {
     color: rgb(142, 238, 142);
 }
+
+.probando{
+    display: flex;
+    justify-content: center;
+}
+
+.apostarCol{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+
+
+}
+
+.apostarG{
+    display: grid;
+    align-items: flex-end;
+}
+
+.container {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "creditoG creditoG . . . . ."
+      ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
+      ". . . . . . ."
+      "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
+      ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
+      ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG"; 
+  }
+  .cartasBancaG { grid-area: cartasBancaG; }
+  .puntosBancaG { grid-area: puntosBancaG; }
+  .creditoG { grid-area: creditoG; }
+  .cartaJugadorG { grid-area: cartaJugadorG; }
+  .puntosJugadorG { grid-area: puntosJugadorG; }
+  .AlertaG { grid-area: AlertaG; }
+  .apostarG { grid-area: apostarG; }
+  .pedirCartaG { grid-area: pedirCartaG; }
+  .noPedirG { grid-area: noPedirG; }

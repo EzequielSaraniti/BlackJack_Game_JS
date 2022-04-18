@@ -19,8 +19,10 @@
         <button class="styleNombreButt" id="jugar">Jugar</button>
     </div>
     <div class="bienvenidoUser" id="bienvenida"></div>
-    <div id="aparece">
-        <div>
+<div class="probando">
+    <div id="aparece" class="container">
+        <div class="creditoG">
+
             <div id="alertaCredito"></div>
 
             <h4 class="boxCredito">Credito: <b id="saldoUser"></b></h4>
@@ -30,29 +32,48 @@
                 <button id="cargoCreditoBtn">Cargar Credito</button>
             </div>
         </div>
-        <div class="elementosBanca">
-            <h5 class="cartasBanca">Cartas Banca: <b id="cartasBanca"></b></h5>
-            <h5 class="puntosBanca">Puntos Banca: <b id="puntosBanca"></b></h5>
+        
+            <div class="cartasBancaG">
+                <h5 class="cartasBanca">Cartas Banca: <b id="cartasBanca"></b></h5>
+            </div>
+            <div class="puntosBancaG">
+                <h5 class="puntosBanca">Puntos Banca: <b id="puntosBanca"></b></h5>
+            </div>
+        
+        
+        <div id="MensajeFinal" class="AlertaG">
         </div>
 
-        <div id="MensajeFinal">
+        
 
-        </div>
-
-        <div class="solicitudCartas">
+        
+            <div class="pedirCartaG">
             <button id="pidoCarta">Pedir Carta</button>
+            </div>
+            <div class="noPedirG">
             <button id="noPido">No pedir</button>
-        </div>
+            </div>
+        
 
-        <div class="elementosPlayer">
-            <h5 class="cartasPlayer">Carta: <b id="cartasPlayer"></b></h5>
+        
+            <div class="cartaJugadorG">
+                <h5 class="cartasPlayer">Carta: <b id="cartasPlayer"></b></h5>
+            </div>
+            <div class="puntosJugadorG">
             <h5 class="puntosPlayer">Tus Puntos: <b id="puntosPlayer"></b></h5>
+            </div>
 
-
-            <input type="text" name="" id="apuestaJugador" class="apuestaInput" placeholder="1">
-            <button id="apuestaJugadorBtn" class="apuestaBtn">Apostar</button>
-        </div>
+        
+            <div class="apostarG">
+                <div class="apostarCol">
+                    <input type="text" name="" id="apuestaJugador" class="apuestaInput" placeholder="1">
+                    <button id="apuestaJugadorBtn" class="apuestaBtn">Apostar</button>
+                </div>
+            </div>
+        
+        
     </div>
+</div>
 
 
     <script src="./js/app.js"></script>
