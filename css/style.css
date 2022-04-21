@@ -9,12 +9,14 @@
     /* Limpiamos márgenes y estilos provenientes de HTML */
     text-decoration: none;
     list-style-type: none;
-
 }
-
 
 html {
     background-color: rgb(0, 70, 0);
+}
+
+header {
+    background-color: rgb(31, 31, 31);
 }
 
 .letterWhite {
@@ -43,6 +45,15 @@ h1 {
 .styleNombre {
     margin: 5px 0px 5px 0px;
     font-size: 1.5rem;
+    text-align: center;
+    border-radius: 30px;
+    background-color: #4f4f4f9c;
+    border: #cfd2d6a8 solid 3px;
+    color: rgb(219, 231, 110);
+}
+
+.nombreUser {
+    color: rgb(219, 231, 110);
 }
 
 .styleNombreText {
@@ -53,7 +64,7 @@ h1 {
 }
 
 .styleNombreButt {
-    margin: 5px 0px 5px 0px;
+    margin: 40px 0px 5px 0px;
     font-size: 1.5rem;
     padding: 4px;
     color: rgb(78, 78, 78);
@@ -70,13 +81,13 @@ h1 {
 
 #aparece {
     background-image: url(../img/mesa-blackjack.jpg);
-    background-size:cover;
-    visibility: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    visibility: visible;
     transition: all 2s;
-    max-width: 492px;
-    max-height: 381px;
-    width: auto;
-    height: auto;
+    width: 640px;
+    height: 495px;
+    margin: 50px 0px 50px 0px;
 }
 
 .bienvenidoUser {
@@ -101,8 +112,29 @@ h4 {
 
 .inputCC {
     margin-top: 0.5rem;
-    margin-left: 1rem;
+    margin-bottom: 0.5rem;
     width: 5rem;
+    border-radius: 4px;
+    text-align: center;
+    height: 2rem;
+    font-size: 0.7rem;
+    background-color: #cacdd28c;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgb(0, 0, 0);
+}
+
+#cargoCreditoBtn{
+    text-align: center;
+    background-color: rgb(0, 13, 56);
+    color: white;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    height: 35px;
+    width: 85px;
 }
 
 .apuestaInput {
@@ -113,10 +145,10 @@ h4 {
     font-weight: bold;
     margin-right: 5px;
     width: 50px;
-    
+    margin-bottom: 20px;
 }
 
-#apuestaJugadorBtn{
+#apuestaJugadorBtn {
     text-align: center;
     background-color: rgb(0, 13, 56);
     color: white;
@@ -137,7 +169,6 @@ h4 {
 }
 
 .cartasBanca {
-    margin-right: 30px;
     text-shadow: 1px 1px 2px black;
     font-size: 1.1rem;
     background-color: rgba(0, 0, 0, 0.534);
@@ -148,7 +179,6 @@ h4 {
 }
 
 .puntosBanca {
-    margin-right: 30px;
     text-shadow: 1px 1px 2px rgba(61, 61, 61, 0);
     font-size: 1.1rem;
     background-color: rgba(0, 0, 0, 0.534);
@@ -159,24 +189,26 @@ h4 {
 }
 
 .cartasPlayer {
-    margin-right: 30px;
     text-shadow: 1px 1px 2px black;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
-    padding: 4px 15px 4px 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 10px 10px 10px 10px;
     color: white;
     text-align: center;
 }
 
+.amarillo{
+    color: rgb(219, 231, 110);
+}
+
 .puntosPlayer {
-    margin-right: 30px;
     text-shadow: 1px 1px 2px rgba(61, 61, 61, 0);
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
-    padding: 4px 15px 4px 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 10px 10px 10px 10px;
     color: white;
     text-align: center;
@@ -229,15 +261,17 @@ h4 {
 }
 
 #MensajeFinal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     visibility: hidden;
     color: white;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.534);
     padding: 4px 15px 4px 4px;
     border-radius: 10px 10px 10px 10px;
-    font-size: 0.85rem;
+    font-size: 1.5rem;
     text-align: center;
-    
 }
 
 .rojo {
@@ -248,22 +282,24 @@ h4 {
     color: rgb(142, 238, 142);
 }
 
-.probando{
+.probando {
     display: flex;
     justify-content: center;
 }
 
-.apostarCol{
+.apostarCol {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-
-
 }
 
-.apostarG{
+.apostarG {
     display: grid;
     align-items: flex-end;
+}
+
+#apostarG{
+    visibility: hidden;
 }
 
 .container {
@@ -274,17 +310,417 @@ h4 {
     grid-template-areas: 
       "creditoG creditoG . . . . ."
       ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
-      ". . . . . . ."
+      ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
       "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
       ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
       ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG"; 
   }
-  .cartasBancaG { grid-area: cartasBancaG; }
-  .puntosBancaG { grid-area: puntosBancaG; }
-  .creditoG { grid-area: creditoG; }
-  .cartaJugadorG { grid-area: cartaJugadorG; }
-  .puntosJugadorG { grid-area: puntosJugadorG; }
-  .AlertaG { grid-area: AlertaG; }
-  .apostarG { grid-area: apostarG; }
-  .pedirCartaG { grid-area: pedirCartaG; }
-  .noPedirG { grid-area: noPedirG; }
+
+.cargoCreditoG { 
+    grid-area: cargoCreditoG; 
+}
+
+.cartasBancaG {
+    grid-area: cartasBancaG;
+}
+
+.puntosBancaG {
+    grid-area: puntosBancaG;
+}
+
+.creditoG {
+    grid-area: creditoG;
+}
+
+.cartaJugadorG {
+    grid-area: cartaJugadorG;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.puntosJugadorG {
+    grid-area: puntosJugadorG;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.AlertaG {
+    grid-area: AlertaG;
+}
+
+.apostarG {
+    grid-area: apostarG;
+}
+
+.pedirCartaG {
+    grid-area: pedirCartaG;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.noPedirG {
+    grid-area: noPedirG;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapE {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonEfecto {
+    min-width: 65px;
+    min-height: 35px;
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4fd1c5;
+    background: linear-gradient(90deg,
+            rgb(129, 230, 168) 0%,
+            rgb(28, 144, 132) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 6px 6px 12px rgba(79, 209, 197, 0.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.buttonEfecto::before {
+    content: "";
+    border-radius: 20%;
+    min-width: calc(95px);
+    min-height: calc(45px);
+    border: 3px solid #69d7c1;
+    box-shadow: 0 0 60px rgba(176, 226, 216, 0.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.buttonEfecto:hover,
+.buttonEfecto:focus {
+    color: #313133;
+    transform: translateY(0px);
+}
+
+.buttonEfecto:hover::before,
+.buttonEfecto:focus::before {
+    opacity: 0.4;
+}
+
+.buttonEfecto::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+    border: 4px solid #00ffcb;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 2.2s infinite;
+}
+
+.buttonEfecto:hover::after,
+.buttonEfecto:focus::after {
+    animation: none;
+    display: none;
+}
+
+@keyframes ring {
+    0% {
+        width: 80px;
+        height: 35px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 95px;
+        height: 45px;
+        opacity: 0;
+    }
+}
+
+footer {
+    background: #111;
+    height: auto;
+    width: 100vw;
+
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+    color: #cacdd2;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+
+    border-radius: 50%;
+}
+
+.socials a i {
+    font-size: 1.1rem;
+    width: 20px;
+
+    transition: color 0.4s ease;
+}
+
+.socials a:hover i {
+    color: aqua;
+}
+
+.footer-bottom {
+    background: #000;
+    width: 100vw;
+    padding: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    float: left;
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom p a {
+    color: #44bae8;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: 0.4;
+    font-weight: 200;
+}
+
+.footer-menu {
+    float: right;
+}
+
+.footer-menu ul {
+    display: flex;
+}
+
+.footer-menu ul li {
+    padding-right: 10px;
+    display: block;
+}
+
+.footer-menu ul li a {
+    color: #cfd2d6;
+    text-decoration: none;
+}
+
+.footer-menu ul li a:hover {
+    color: #27bcda;
+}
+
+@media (max-width: 500px) {
+    .footer-menu ul {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+/* AGREGAMOS EFECTO BUTTON */
+
+.button {
+    --offset: 10px;
+    --border-size: 2px;
+    display: block;
+    position: relative;
+    padding: 1.5em 3em;
+    appearance: none;
+    border: 0;
+    background: rgb(57, 55, 55);
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 var(--border-size) currentcolor;
+    transition: background 0.8s ease;
+}
+
+.button:hover {
+    background: rgba(100, 0, 0, 0.03);
+}
+
+.button__horizontal,
+.button__vertical {
+    position: absolute;
+    top: var(--horizontal-offset, 0);
+    right: var(--vertical-offset, 0);
+    bottom: var(--horizontal-offset, 0);
+    left: var(--vertical-offset, 0);
+    transition: transform 0.8s ease;
+    will-change: transform;
+}
+
+.button__horizontal::before,
+.button__vertical::before {
+    content: "";
+    position: absolute;
+    border: inherit;
+}
+
+.button__horizontal {
+    --vertical-offset: calc(var(--offset) * -1);
+    border-top: var(--border-size) solid currentcolor;
+    border-bottom: var(--border-size) solid currentcolor;
+}
+
+.button__horizontal::before {
+    top: calc(var(--vertical-offset) - var(--border-size));
+    bottom: calc(var(--vertical-offset) - var(--border-size));
+    left: calc(var(--vertical-offset) * -1);
+    right: calc(var(--vertical-offset) * -1);
+}
+
+.button:hover .button__horizontal {
+    transform: scaleX(0);
+}
+
+.button__vertical {
+    --horizontal-offset: calc(var(--offset) * -1);
+    border-left: var(--border-size) solid currentcolor;
+    border-right: var(--border-size) solid currentcolor;
+}
+
+.button__vertical::before {
+    top: calc(var(--horizontal-offset) * -1);
+    bottom: calc(var(--horizontal-offset) * -1);
+    left: calc(var(--horizontal-offset) - var(--border-size));
+    right: calc(var(--horizontal-offset) - var(--border-size));
+}
+
+.button:hover .button__vertical {
+    transform: scaleY(0);
+}
+
+/* AGREGAMOS EFECTO BUTTON FIN */
+
+
+/* Agregamos Efecto titulo */
+
+.titleP {
+    text-transform: uppercase;
+    letter-spacing: .5em;
+    display: inline-block;
+    border: 4px double rgba(255, 255, 255, 0.25);
+    border-width: 4px 0;
+    padding: 1.5em 0em;
+    top: 18%;
+    left: 50%;
+    width: 40em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: #fff;
+    text-align: center;
+
+}
+
+.titleP .titleC {
+    font: 700 4em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: .25em 0 .325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgb(255, 255, 255);
+    /* Clip Background Image */
+    background: url(../img/animated-text-fill.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Animate Background Image */
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    /* Activate hardware acceleration for smoother animations */
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+}
+
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Efecto titulo FIN */
+
+.creditoStyle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

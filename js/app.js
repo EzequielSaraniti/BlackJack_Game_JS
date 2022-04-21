@@ -12,7 +12,7 @@ btnJugar.addEventListener('click', bienvenida)
 function bienvenida() {
     nombre = document.getElementById('nombreUser').value
     //console.log(nombre)
-    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Bienvenido ${nombre} te deseo mucha suerte!</h2>`
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button>Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
     //myDiv.className = "apareceContenido";
@@ -435,6 +435,8 @@ function cargoCredito() {
         } else
             document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
         document.getElementById("alertaCredito").style.display = "none"; // show
+        document.getElementById("cargoCred").style.visibility = "hidden"; // show
+        document.getElementById("apostarG").style.visibility = "visible"; // sho
 
     }
 }
@@ -447,7 +449,12 @@ function apuesta() {
 
     if (credito <= 0) {
         alert("Te quedaste sin saldo, a continuación podrás cargar saldo.")
-        cargoCredito()
+        
+        document.getElementById("cargoCred").style.visibility = "visible"; // show
+        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
+        document.getElementById("apostarG").style.visibility = "hidden"; // show
+
+        return
     }
 
     apuestaJugadorInp = document.getElementById('apuestaJugador').value
@@ -466,7 +473,7 @@ function apuesta() {
         repartoInicialUser();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
-        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
+        document.getElementById("MensajeFinal").style.display = "hidden"; // show
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b></b>`
     }
 };
@@ -489,8 +496,8 @@ function repartoInicialUser() {
         manoUser = manoUser + puntos;
     }
 
-    let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b>${manoUser}</b>`
-    let cartax = document.getElementById('cartasPlayer').innerHTML = `${puntos} de ${colorC}`
+    let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b class="amarillo">${manoUser}</b>`
+    let cartax = document.getElementById('cartasPlayer').innerHTML = `<b class="amarillo">${puntos} de ${colorC}</b>`
 
     document.getElementById("pidoCarta").style.visibility = "visible"; // show
     document.getElementById("noPido").style.visibility = "visible"; // show
