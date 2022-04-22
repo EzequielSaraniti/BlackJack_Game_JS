@@ -4,7 +4,7 @@
 function bienvenida() {
 
     nombre = document.getElementById('nombreUser').value
-    
+
     const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button>Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
@@ -22,6 +22,7 @@ function bienvenida() {
 function cargoCredito() {
 
     if (credito > 0) {
+        //Si tu credito es "0", enviamos una alerta (En futuro se reemplazará con una librería)
         alert(`Solo podrás cargar saldo cuando el mismo séa U$0.`);
     }
 
@@ -33,6 +34,7 @@ function cargoCredito() {
         credito = credito + parseInt(creditoCarga)
 
         if (credito != parseInt(credito)) {
+            //Si ingresaste un valor inválido, enviamos una alerta (En futuro se reemplazará con una librería)
             alert(`Ingresaste un valor inválido`);
             break
         } else
@@ -63,6 +65,7 @@ function apuesta() {
     apuestaJugadorInp = document.getElementById('apuestaJugador').value
     apuestaJugador = parseInt(apuestaJugadorInp)
 
+    //Si no tenemos saldo para cubrir el monto apostado, enviamos una alerta (En futuro se reemplazará con una librería)
     if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))) {
 
         alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar")
