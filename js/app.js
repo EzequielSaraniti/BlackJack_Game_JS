@@ -1,21 +1,13 @@
-//Definimos el nombre del jugador
-//const nombre = prompt("Bienvenido a la mesa de Blackjack, como es tu nombre?");
+//Funciones del proyecto
 
-//document.getElementById('bienvenida').innerHTML = `<h2>Bienvenido ${nombre} al mejor Blackjack! Muchas suerte!</h2>`
-
-
-let nombre = ""
-
-const btnJugar = document.getElementById('jugar')
-btnJugar.addEventListener('click', bienvenida)
-
+//Esta función es el "Login del juego"
 function bienvenida() {
+
     nombre = document.getElementById('nombreUser').value
-    //console.log(nombre)
+    
     const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button>Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
-    //myDiv.className = "apareceContenido";
     document.getElementById("aparece").style.visibility = "visible"; // show
     document.getElementById("aparece").style.opacity = 1; // show
     document.getElementById("IngresoUser").style.display = "none"; // show
@@ -23,400 +15,10 @@ function bienvenida() {
 
 
 }
-//alert(`Hola ${nombre}, te deseo mucha suerte, a jugar!!`);
 
 
-let credito = 0;
-let apuestaJugador = 0;
-let manoUser = 0;
-let manoCrupier = 0;
-let cartasJugador = [];
-let manosJugadas = [];
 
-
-// Creamos Mazo de cartas con un ARRAY y Objetos dentro
-
-// Color "Corazón"
-const mazo = [{
-        valor: 1,
-        carta: "uno",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 2,
-        carta: "dos",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 3,
-        carta: "tres",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 4,
-        carta: "cuatro",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 5,
-        carta: "cinco",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 6,
-        carta: "seis",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 7,
-        carta: "siete",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 8,
-        carta: "ocho",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 9,
-        carta: "nueve",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "diez",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "jota",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "reina",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "rey",
-        color: "corazon",
-        imagen: "imagen"
-    },
-
-    // Color Diamante
-
-    {
-        valor: 1,
-        carta: "uno",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 2,
-        carta: "dos",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 3,
-        carta: "tres",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 4,
-        carta: "cuatro",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 5,
-        carta: "cinco",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 6,
-        carta: "seis",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 7,
-        carta: "siete",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 8,
-        carta: "ocho",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 9,
-        carta: "nueve",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "diez",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "jota",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "reina",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "rey",
-        color: "diamante",
-        imagen: "imagen"
-    },
-
-    // Color Trebol
-
-    {
-        valor: 1,
-        carta: "uno",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 2,
-        carta: "dos",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 3,
-        carta: "tres",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 4,
-        carta: "cuatro",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 5,
-        carta: "cinco",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 6,
-        carta: "seis",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 7,
-        carta: "siete",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 8,
-        carta: "ocho",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 9,
-        carta: "nueve",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "diez",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "jota",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "reina",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "rey",
-        color: "trebol",
-        imagen: "imagen"
-    },
-
-
-    //Color pica
-
-    {
-        valor: 1,
-        carta: "uno",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 2,
-        carta: "dos",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 3,
-        carta: "tres",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 4,
-        carta: "cuatro",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 5,
-        carta: "cinco",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 6,
-        carta: "seis",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 7,
-        carta: "siete",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 8,
-        carta: "ocho",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 9,
-        carta: "nueve",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "diez",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "jota",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 10,
-        carta: "reina",
-        color: "pica",
-        imagen: "imagen"
-    },
-
-    {
-        valor: 1,
-        carta: "rey",
-        color: "pica",
-        imagen: "imagen"
-    }
-
-]
-
-
-//cargoCredito();
-
-const btnCargoCredito = document.getElementById('cargoCreditoBtn')
-btnCargoCredito.addEventListener('click', cargoCredito)
-
-
+//Función para cargar saldo y comenzar a jugar
 function cargoCredito() {
 
     if (credito > 0) {
@@ -442,10 +44,10 @@ function cargoCredito() {
     }
 }
 
-const btnApuestaJugador = document.getElementById('apuestaJugadorBtn')
-btnApuestaJugador.addEventListener('click', apuesta)
 
 
+
+//Función para definir el monto apostado
 function apuesta() {
 
     if (credito <= 0) {
@@ -462,11 +64,12 @@ function apuesta() {
     apuestaJugador = parseInt(apuestaJugadorInp)
 
     if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))) {
+
         alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar")
+
     } else {
 
 
-        //alert(`Tengo ${credito} en credito y ${apuestaJugador} es mi apuesta`)
         manoUser = 0;
         manoCrupier = 0;
         cartasJugador = [];
@@ -480,7 +83,7 @@ function apuesta() {
 };
 
 
-
+//Función para entregar cartas al usuario de forma aleatoria
 function repartoInicialUser() {
 
     let cartaRandom = Math.random() * 52;
@@ -502,93 +105,29 @@ function repartoInicialUser() {
 
     document.getElementById("pidoCarta").style.visibility = "visible"; // show
     document.getElementById("noPido").style.visibility = "visible"; // show
-    //alert(`Obtuviste un ${puntos} de ${colorC}, sumas ${manoUser}`)
-    //cartasJugador.push(mazo[cartaRandom])
-    //coloresObtenidos.push(colorC)
 
-
-    // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
-    //const findx = coloresObtenidos.find(function (comodin) {
-    //return comodin == "comodin"
-    //})
-
-    // if (findx == "comodin") {
-    //     alert(`Obtuviste el comodín, GANASTE: ${apuestaJugador * 2} Dolares`)
-    //     credito = parseInt(credito) + (parseInt(apuestaJugador) * 2)
-    //     alert(`Tu saldo es de: ${credito} Dolares`);
-    //     manosJugadas.push("gane")
-    //     return apuesta()
-    // }
-    // Colocamos un find para buscar el comodin en caso de obtenerlo, ganamos un x2 de la apuesta.
 
 
     if (manoUser > 21) {
-        //Pusheamos la mano perdida
-        //manosJugadas.push("perdi")
 
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
         let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares</b>`
-        //alert(`Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`)
-        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
         credito = parseInt(credito) - parseInt(apuestaJugador)
-        //alert(`Tu saldo es de: ${credito} Dolares`);
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
-        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        //const manosPerdidas = manosJugadas.filter(function (mePase) {
-        //return mePase == "perdi"
-        //})
-        //alert(`Llevas: ${manosPerdidas.length} manos perdidas`);
-        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
+
         document.getElementById("pidoCarta").style.visibility = "hidden"; // show
         document.getElementById("noPido").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugador").style.visibility = "visible"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
-
-        // let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
-        // seguirJugando = seguirJugando.toLocaleLowerCase()
-
-        // if (seguirJugando == "y") {
-        //     apuesta()
-        // } else if (seguirJugando == "n") {
-        //     return
-        // } else {
-        //     apuesta()
-        // }
     }
-
-    //if (manoUser < 22) {
-    //pedirOtraCarta()
-    //}
-
 }
 
-const pedirCarta = document.getElementById('pidoCarta')
-pedirCarta.addEventListener('click', repartoInicialUser)
-
-const noPedir = document.getElementById('noPido')
-noPedir.addEventListener('click', repartoCrupier)
-
-//function pedirOtraCarta() {
-
-
-
-//let pedirOtra = prompt("¿ Quieres pedir otra carta ? (Y/n)")
-//pedirOtra = pedirOtra.toLocaleLowerCase()
-
-// if (pedirOtra == "y") {
-//     repartoInicialUser()
-// } else if (pedirOtra == "n") {
-//     repartoCrupier()
-// } else {
-//     repartoInicialUser()
-// }
-
-//}
-
+//Cuando el usuario termina de pedir cartas, con esta función repartimos las cartas del crupier.
 function repartoCrupier() {
 
+    //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
     do {
 
         let cartaRandom = Math.random() * 13;
@@ -660,84 +199,45 @@ function repartoCrupier() {
 
         manoCrupier = manoCrupier + puntos
 
-    } while (manoCrupier < 17)
+    } while (manoCrupier <= 17)
 
 
+    //Condicional si el crupier gana
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
         let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares</b>`
-        //alert(`El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!!`)
-        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+
         credito = parseInt(credito) - parseInt(apuestaJugador)
-        //alert(`Tu saldo es de: ${credito} Dolares`);
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
-
-        //Pusheamos la mano.
-        //manosJugadas.push("perdi")
-
-        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
-        // const manosPerdidas = manosJugadas.filter(function (perdi) {
-        //     return perdi == "perdi"
-        // })
-        // alert(`Llevas: ${manosPerdidas.length} manos perdidas!!`);
-        // Agregamos filtrado de cartas, para saber cuantas manos perdimos
     }
 
+    //Condicional si tu ganas
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
         let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="verde">El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!</b>`
-        //alert(`El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`)
-        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
+
         credito = parseInt(credito) + parseInt(apuestaJugador)
-        //alert(`Tu saldo es de: ${credito} Dolares`);
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
-
-        //Pusheamos la mano.
-        //manosJugadas.push("gane")
-
-        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        // const manosGanadas = manosJugadas.filter(function (gane) {
-        //     return gane == "gane"
-        // })
-        // alert(`Llevas: ${manosGanadas.length} manos ganadas!!`);
-        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
 
+    //Condicional si empatas con el crupier
     if (manoCrupier == manoUser) {
         document.getElementById("MensajeFinal").style.visibility = "visible"; // show
+
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
         let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b>El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!</b>`
-        //alert(`El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`)
-        //alert(`Pediste un total de ${cartasJugador.length} cartas!!!`)
-        //alert(`Tu saldo es de: ${credito} Dolares`);
+
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
-
-        //Pusheamos la mano.
-        //manosJugadas.push("empate")
-
-        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
-        // const manosEmpatadas = manosJugadas.filter(function (empate) {
-        //     return empate == "empate"
-        // })
-        // alert(`Llevas: ${manosEmpatadas.length} manos empatadas!!`);
-        // Agregamos filtrado de cartas, para saber cuantas manos ganamos
     }
 
+    //Sacamos de la vista botones de pedir cartas y volvemos a habilitar las apuestas
     document.getElementById("pidoCarta").style.visibility = "hidden"; // show
     document.getElementById("noPido").style.visibility = "hidden"; // show
     document.getElementById("apuestaJugador").style.visibility = "visible"; // show
     document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
-    // let seguirJugando = prompt("¿ Quieres seguir jugando ? (Y/n)")
-    // seguirJugando = seguirJugando.toLocaleLowerCase()
-
-    // if (seguirJugando == "y") {
-    //     apuesta()
-    // } else if (seguirJugando == "n") {
-    //     return
-    // } else {
-    //     apuesta()
-    // }
 }
