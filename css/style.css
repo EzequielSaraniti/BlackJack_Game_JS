@@ -83,7 +83,8 @@ h1 {
     background-image: url(../img/mesa-blackjack.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    visibility: visible;
+    visibility: hidden;
+    opacity: 0;
     transition: all 2s;
     width: 640px;
     height: 495px;
@@ -124,7 +125,7 @@ h4 {
     text-shadow: 0 0 2px rgb(0, 0, 0);
 }
 
-#cargoCreditoBtn{
+#cargoCreditoBtn {
     text-align: center;
     background-color: rgb(0, 13, 56);
     color: white;
@@ -199,7 +200,7 @@ h4 {
     text-align: center;
 }
 
-.amarillo{
+.amarillo {
     color: rgb(219, 231, 110);
 }
 
@@ -298,26 +299,26 @@ h4 {
     align-items: flex-end;
 }
 
-#apostarG{
+#apostarG {
     visibility: hidden;
 }
 
 .container {
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-      "creditoG creditoG . . . . ."
-      ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
-      ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
-      "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
-      ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
-      ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG"; 
-  }
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "creditoG creditoG . . . . ."
+        ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
+        ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
+        "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
+        ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
+        ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG";
+}
 
-.cargoCreditoG { 
-    grid-area: cargoCreditoG; 
+.cargoCreditoG {
+    grid-area: cargoCreditoG;
 }
 
 .cartasBancaG {
@@ -718,7 +719,7 @@ footer {
 
 /* Efecto titulo FIN */
 
-.creditoStyle{
+.creditoStyle {
     display: flex;
     flex-direction: column;
     align-items: center;

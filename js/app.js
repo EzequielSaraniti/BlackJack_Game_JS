@@ -17,6 +17,7 @@ function bienvenida() {
 
     //myDiv.className = "apareceContenido";
     document.getElementById("aparece").style.visibility = "visible"; // show
+    document.getElementById("aparece").style.opacity = 1; // show
     document.getElementById("IngresoUser").style.display = "none"; // show
 
 
@@ -449,7 +450,7 @@ function apuesta() {
 
     if (credito <= 0) {
         alert("Te quedaste sin saldo, a continuación podrás cargar saldo.")
-        
+
         document.getElementById("cargoCred").style.visibility = "visible"; // show
         document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
         document.getElementById("apostarG").style.visibility = "hidden"; // show
@@ -473,7 +474,7 @@ function apuesta() {
         repartoInicialUser();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
-        document.getElementById("MensajeFinal").style.display = "hidden"; // show
+        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b></b>`
     }
 };
