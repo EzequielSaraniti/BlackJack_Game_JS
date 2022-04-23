@@ -1,7 +1,7 @@
 //Funciones del proyecto
 
 //Iniciamos con el usuario guardado
-if(localStorage.getItem("userLog") == "true"){
+if (localStorage.getItem("userLog") == "true") {
     nombre = localStorage.getItem("nombreUser")
 
     const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button onclick="logoutUser();">Logout</button>`
@@ -16,7 +16,7 @@ if(localStorage.getItem("userLog") == "true"){
 function logoutUser() {
     localStorage.removeItem("nombreUser")
     localStorage.removeItem("userLog")
-    location.reload()   
+    location.reload()
 }
 
 //Esta función es el "Login del juego"
@@ -58,7 +58,7 @@ function cargoCredito() {
             alert(`Ingresaste un valor inválido`);
             break
         } else
-        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
+            document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
         document.getElementById("alertaCredito").style.display = "none"; // show
         document.getElementById("cargoCred").style.visibility = "hidden"; // show
         document.getElementById("apostarG").style.visibility = "visible"; // sho
@@ -73,7 +73,7 @@ function cargoCredito() {
 function apuesta() {
 
     //Si tenemos menos de 20 cartas en el mazo, volvemos a crear un mazo nuevo.
-    if (deck.length < 20){
+    if (deck.length < 20) {
         armoDeck()
     }
 
