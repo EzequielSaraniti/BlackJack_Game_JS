@@ -1,18 +1,38 @@
 //Funciones del proyecto
 
-//Esta función es el "Login del juego"
-function bienvenida() {
+//Iniciamos con el usuario guardado
+if(localStorage.getItem("userLog") == "true"){
+    nombre = localStorage.getItem("nombreUser")
 
-    nombre = document.getElementById('nombreUser').value
-
-    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button>Logout</button>`
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button onclick="logoutUser();">Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
     document.getElementById("aparece").style.visibility = "visible"; // show
     document.getElementById("aparece").style.opacity = 1; // show
     document.getElementById("IngresoUser").style.display = "none"; // show
+}
+
+//Esta función es el logout del usuario
+function logoutUser() {
+    localStorage.removeItem("nombreUser")
+    localStorage.removeItem("userLog")
+    location.reload()   
+}
+
+//Esta función es el "Login del juego"
+function bienvenida() {
+    nombre = document.getElementById('nombreUser').value
+    userLog = true
+    localStorage.setItem("nombreUser", nombre)
+    localStorage.setItem("userLog", userLog)
 
 
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button onclick="logoutUser();">Logout</button>`
+    const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
+
+    document.getElementById("aparece").style.visibility = "visible"; // show
+    document.getElementById("aparece").style.opacity = 1; // show
+    document.getElementById("IngresoUser").style.display = "none"; // show
 
 }
 
@@ -38,7 +58,7 @@ function cargoCredito() {
             alert(`Ingresaste un valor inválido`);
             break
         } else
-            document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
         document.getElementById("alertaCredito").style.display = "none"; // show
         document.getElementById("cargoCred").style.visibility = "hidden"; // show
         document.getElementById("apostarG").style.visibility = "visible"; // sho
@@ -52,6 +72,12 @@ function cargoCredito() {
 //Función para definir el monto apostado
 function apuesta() {
 
+    //Si tenemos menos de 20 cartas en el mazo, volvemos a crear un mazo nuevo.
+    if (deck.length < 20){
+        armoDeck()
+    }
+
+    //Si tenemos 0 saldo, enviamos una alerta (En futuro se reemplazará con una librería).
     if (credito <= 0) {
         alert("Te quedaste sin saldo, a continuación podrás cargar saldo.")
 

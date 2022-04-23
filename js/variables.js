@@ -1,5 +1,6 @@
 //Definimos variables globales del proyecto
 
+let deck = [];
 let nombre = ""
 let credito = 0;
 let apuestaJugador = 0;
@@ -7,6 +8,7 @@ let manoUser = 0;
 let manoCrupier = 0;
 let cartasJugador = [];
 let manosJugadas = [];
+let userLog = false
 
 //Variables que interactuan con el HTML
 const btnJugar = document.getElementById('jugar')
@@ -14,6 +16,7 @@ const btnCargoCredito = document.getElementById('cargoCreditoBtn')
 const btnApuestaJugador = document.getElementById('apuestaJugadorBtn')
 const pedirCarta = document.getElementById('pidoCarta')
 const noPedir = document.getElementById('noPido')
+const loginUser = document.getElementById('logUser')
 
 
 
