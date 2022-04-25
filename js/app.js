@@ -74,7 +74,8 @@ function apuesta() {
 
     //Si tenemos menos de 20 cartas en el mazo, volvemos a crear un mazo nuevo.
     if (deck.length < 20) {
-        armoDeck()
+        deck = [];
+        armoDeck();
     }
 
     //Si tenemos 0 saldo, enviamos una alerta (En futuro se reemplazará con una librería).
@@ -102,6 +103,9 @@ function apuesta() {
         manoUser = 0;
         manoCrupier = 0;
         cartasJugador = [];
+        puntosJugador = [];
+        cartasBanca = [];
+        puntosBanca = [];
         coloresObtenidos = [];
         repartoInicialUser();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
@@ -115,22 +119,43 @@ function apuesta() {
 //Función para entregar cartas al usuario de forma aleatoria
 function repartoInicialUser() {
 
-    let cartaRandom = Math.random() * 52;
+    let cartaRandom = Math.random() * deck.length;
     cartaRandom = Math.round(cartaRandom);
 
-    let puntos = 0;
+    let puntosR = 0;
 
-    puntos = puntos + mazo[cartaRandom].valor
-    let colorC = mazo[cartaRandom].color
+    puntosR = parseInt(deck[cartaRandom].puntos)
+    let colorC = deck[cartaRandom].palo
 
-    if (puntos == 1 && manoUser + 11 < 22) {
-        manoUser = manoUser + 11
-    } else {
-        manoUser = manoUser + puntos;
+    //pusheamos el objeto carta a un array
+    cartasJugador.push(deck[cartaRandom])
+    //pusheamos los puntos obtenidos a un array
+    puntosJugador.push(deck[cartaRandom].puntos)
+    //ordenamos array de mayor a menor
+    puntosJugador.sort( (a, b) => b - a )
+    
+    manoUser = 0;
+
+    for(let i = 0; i < puntosJugador.length; i++){
+
+        //Si el jugador tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
+        if(manoUser < 11 && puntosJugador[i] == 1){
+        manoUser = manoUser += 11;
+
+        }else{
+            manoUser = manoUser += puntosJugador[i];
+        }
+
     }
 
+        // manoUser = parseInt(manoUser) + parseInt(puntosR);
+
     let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b class="amarillo">${manoUser}</b>`
-    let cartax = document.getElementById('cartasPlayer').innerHTML = `<b class="amarillo">${puntos} de ${colorC}</b>`
+    let cartax = document.getElementById('cartasPlayer').innerHTML = `<b class="amarillo">${puntosR} de ${colorC}</b>`
+
+    //Quitamos del mazo la carta que obtubimos
+    deck.splice(cartaRandom, 1)
+
 
     document.getElementById("pidoCarta").style.visibility = "visible"; // show
     document.getElementById("noPido").style.visibility = "visible"; // show
@@ -151,85 +176,55 @@ function repartoInicialUser() {
         document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
     }
+
 }
 
 //Cuando el usuario termina de pedir cartas, con esta función repartimos las cartas del crupier.
 function repartoCrupier() {
 
+do{
     //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
-    do {
+    let cartaRandom = Math.random() * deck.length;
+    cartaRandom = Math.round(cartaRandom);
 
-        let cartaRandom = Math.random() * 13;
-        cartaRandom = Math.round(cartaRandom);
+    let puntosR = 0;
 
-        switch (cartaRandom) {
+    puntosR = parseInt(deck[cartaRandom].puntos)
 
-            case 0:
-                if ((manoCrupier + 11) < 22) {
-                    puntos = 11
-                    break
-                }
-                puntos = 1;
-                break
+    //pusheamos el objeto carta a un array
+    cartasBanca.push(deck[cartaRandom])
+    //pusheamos los puntos obtenidos a un array
+    puntosBanca.push(deck[cartaRandom].puntos)
+    //ordenamos array de mayor a menor
+    puntosBanca.sort( (a, b) => b - a )
+    
+    manoCrupier = 0;
 
-            case 1:
-                puntos = 1;
-                break
+    for(let i = 0; i < puntosBanca.length; i++){
 
-            case 2:
-                puntos = 2;
-                break
+        //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
+        if(manoCrupier < 11 && puntosBanca[i] == 1){
+            manoCrupier = manoCrupier += 11;
 
-            case 3:
-                puntos = 3;
-                break
-
-            case 4:
-                puntos = 4;
-                break
-
-            case 5:
-                puntos = 5;
-                break
-
-            case 6:
-                puntos = 6;
-                break
-
-            case 7:
-                puntos = 7;
-                break
-
-            case 8:
-                puntos = 8;
-                break
-
-            case 9:
-                puntos = 9;
-                break
-
-            case 10:
-                puntos = 10;
-                break
-
-            case 11:
-                puntos = 10;
-                break
-
-            case 12:
-                puntos = 10;
-                break
-
-            case 13:
-                puntos = 10;
-                break
-
+        }else{
+            manoCrupier = manoCrupier += puntosBanca[i];
         }
 
-        manoCrupier = manoCrupier + puntos
+    }
 
-    } while (manoCrupier <= 17)
+    //Quitamos del mazo la carta que obtubimos
+    deck.splice(cartaRandom, 1)
 
+}while (manoCrupier <= 17)
+
+
+if (manoCrupier >= 17){
+    quienGana()
+}
+
+}
+
+function quienGana(){
 
     //Condicional si el crupier gana
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {

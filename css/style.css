@@ -80,16 +80,17 @@ h1 {
 }
 
 #aparece {
-    background-image: url(../img/mesa-blackjack.jpg);
+    background-image: url(../img/mesa-black.png);
     background-size: cover;
     background-repeat: no-repeat;
     visibility: hidden;
     opacity: 0;
     transition: all 2s;
-    width: 640px;
-    height: 495px;
-    margin: 50px 0px 50px 0px;
+    width: auto;
+    height: auto;
+    margin: 50px 0px 0px 0px;
 }
+
 
 .bienvenidoUser {
     text-align: center;
@@ -306,15 +307,30 @@ h4 {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
-        "creditoG creditoG . . . . ."
+        "creditoG creditoG imgFichas imgFichas imgFichas . ."
+        ". . . . . . ."
         ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
         ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
         "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
         ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
+        ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG"
         ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG";
+}
+
+.imgFichas{
+    grid-area: imgFichas;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 13px;
+}
+
+.imgFichasStyle{
+    max-width: 80%;
+    max-height: 80%;
 }
 
 .cargoCreditoG {

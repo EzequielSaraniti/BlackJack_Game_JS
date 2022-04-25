@@ -7,8 +7,11 @@ let apuestaJugador = 0;
 let manoUser = 0;
 let manoCrupier = 0;
 let cartasJugador = [];
+let cartasBanca = [];
 let manosJugadas = [];
 let userLog = false
+let puntosJugador = [];
+let puntosBanca = [];
 
 //Variables que interactuan con el HTML
 const btnJugar = document.getElementById('jugar')
