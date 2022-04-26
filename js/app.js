@@ -99,7 +99,7 @@ function apuesta() {
 
     } else {
 
-
+        i = 1;
         manoUser = 0;
         manoCrupier = 0;
         cartasJugador = [];
@@ -125,7 +125,10 @@ function repartoInicialUser() {
     let puntosR = 0;
 
     puntosR = parseInt(deck[cartaRandom].puntos)
-    let colorC = deck[cartaRandom].palo
+    let paloC = deck[cartaRandom].palo
+    let valorC = deck[cartaRandom].valor
+    let colorC = deck[cartaRandom].color
+
 
     //pusheamos el objeto carta a un array
     cartasJugador.push(deck[cartaRandom])
@@ -133,6 +136,32 @@ function repartoInicialUser() {
     puntosJugador.push(deck[cartaRandom].puntos)
     //ordenamos array de mayor a menor
     puntosJugador.sort( (a, b) => b - a )
+    
+    
+    rutaCartaUser.innerHTML = "";
+    let j = 0;
+    cartasJugador.forEach(carta => {
+
+        const dibujoCartaUser = document.createElement("div")
+        dibujoCartaUser.classList.add("tamañoCarta")
+        j = j + 1;
+        
+        if(i == j){
+            dibujoCartaUser.innerHTML = `<div class="card efectoCarta ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+        }else{
+            dibujoCartaUser.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+            }
+            
+
+        // let creoCarta = document.getElementById('cartasPlayer').innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+
+        rutaCartaUser.appendChild(dibujoCartaUser)
+
+    });
+
+    i = i += 1;
+
+
     
     manoUser = 0;
 
@@ -151,7 +180,8 @@ function repartoInicialUser() {
         // manoUser = parseInt(manoUser) + parseInt(puntosR);
 
     let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b class="amarillo">${manoUser}</b>`
-    let cartax = document.getElementById('cartasPlayer').innerHTML = `<b class="amarillo">${puntosR} de ${colorC}</b>`
+    // let cartax = document.getElementById('cartasPlayer').innerHTML = `<div class="card black" data-value="K ♠">♠</div>`
+
 
     //Quitamos del mazo la carta que obtubimos
     deck.splice(cartaRandom, 1)

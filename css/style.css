@@ -316,8 +316,8 @@ h4 {
         ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
         "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
         ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
-        ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG"
-        ". cartaJugadorG cartaJugadorG . puntosJugadorG puntosJugadorG apostarG";
+        ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
+        ". . . puntosJugadorG . . apostarG";
 }
 
 .imgFichas{
@@ -350,10 +350,10 @@ h4 {
 }
 
 .cartaJugadorG {
-    grid-area: cartaJugadorG;
-    display: grid;
-    align-content: center;
+    display: flex;
     justify-content: center;
+    grid-area: cartaJugadorG;
+
 }
 
 .puntosJugadorG {
@@ -741,3 +741,68 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+/* ESTILOS DE CARTAS */
+.card.black {
+    color: black;
+}
+
+.card.red {
+    color: rgb(221, 34, 34);
+}
+
+.tamañoCarta{
+    width: 64px;
+    height: 112px;
+}
+
+.card {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    width: 64px;
+    height: 112px;
+    background-color: white;
+}
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+.card::before {
+    top: 0.5rem;
+    left: 0.5rem;
+}
+.card::before, .card::after {
+    position: absolute;
+    content: attr(data-value);
+    font-size: 1rem;
+}
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+.card::after {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    transform: rotate(180deg);
+}
+.card::before, .card::after {
+    position: absolute;
+    content: attr(data-value);
+    font-size: 1rem;
+}
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+.card1{
+    top:0px;
+}
+
+/* FIN DE ESTILOS DE CARTAS */
+
