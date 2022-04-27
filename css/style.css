@@ -320,7 +320,7 @@ h4 {
         ". . . puntosJugadorG . . apostarG";
 }
 
-.imgFichas{
+.imgFichas {
     grid-area: imgFichas;
     display: flex;
     justify-content: center;
@@ -328,7 +328,7 @@ h4 {
     margin-top: 13px;
 }
 
-.imgFichasStyle{
+.imgFichasStyle {
     max-width: 80%;
     max-height: 80%;
 }
@@ -338,6 +338,7 @@ h4 {
 }
 
 .cartasBancaG {
+    display: flex;
     grid-area: cartasBancaG;
 }
 
@@ -751,7 +752,7 @@ footer {
     color: rgb(221, 34, 34);
 }
 
-.tamañoCarta{
+.tamañoCarta {
     width: 64px;
     height: 112px;
 }
@@ -770,7 +771,10 @@ footer {
     height: 112px;
     background-color: white;
 }
-*, *::after, *::before {
+
+*,
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
@@ -778,31 +782,164 @@ footer {
     top: 0.5rem;
     left: 0.5rem;
 }
-.card::before, .card::after {
+
+.card::before,
+.card::after {
     position: absolute;
     content: attr(data-value);
     font-size: 1rem;
 }
-*, *::after, *::before {
+
+*,
+*::after,
+*::before {
     box-sizing: border-box;
 }
+
 .card::after {
     bottom: 0.5rem;
     right: 0.5rem;
     transform: rotate(180deg);
 }
-.card::before, .card::after {
+
+.card::before,
+.card::after {
     position: absolute;
     content: attr(data-value);
     font-size: 1rem;
 }
-*, *::after, *::before {
+
+*,
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
-.card1{
-    top:0px;
+.card1 {
+    top: 0px;
 }
 
 /* FIN DE ESTILOS DE CARTAS */
 
+.tamañoCartaX {
+    width: 75px;
+    height: 112px;
+    background-image: url(../img/fondo-carta2.jpg);
+    background-repeat: none;
+    background-size: cover;
+}
+
+
+/* Movimiento Carta */
+.animation-target {
+    -webkit-animation: animation 5000ms linear both;
+    animation: animation 5000ms linear both;
+}
+
+/* Generated with Bounce.js. Edit at http://bouncejs.com#%7Bs%3A%5B%7BT%3A%22t%22%2Ce%3A%22b%22%2Cd%3A5000%2CD%3A0%2Cf%3A%7Bx%3A0%2Cy%3A400%7D%2Ct%3A%7Bx%3A0%2Cy%3A0%7D%2Cs%3A3%2Cb%3A4%7D%5D%7D */
+
+@-webkit-keyframes animation {
+    0% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 400, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 400, 0, 1);
+    }
+
+    4.3% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 194.292, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 194.292, 0, 1);
+    }
+
+    8.61% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.566, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.566, 0, 1);
+    }
+
+    12.91% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -20.911, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -20.911, 0, 1);
+    }
+
+    17.22% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -37.334, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -37.334, 0, 1);
+    }
+
+    28.33% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -8.25, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -8.25, 0, 1);
+    }
+
+    39.44% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.492, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.492, 0, 1);
+    }
+
+    61.66% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.166, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.166, 0, 1);
+    }
+
+    83.98% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.011, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.011, 0, 1);
+    }
+
+    100% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+}
+
+@keyframes animation {
+    0% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 400, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 400, 0, 1);
+    }
+
+    4.3% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 194.292, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 194.292, 0, 1);
+    }
+
+    8.61% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.566, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.566, 0, 1);
+    }
+
+    12.91% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -20.911, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -20.911, 0, 1);
+    }
+
+    17.22% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -37.334, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -37.334, 0, 1);
+    }
+
+    28.33% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -8.25, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -8.25, 0, 1);
+    }
+
+    39.44% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.492, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.492, 0, 1);
+    }
+
+    61.66% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.166, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.166, 0, 1);
+    }
+
+    83.98% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.011, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.011, 0, 1);
+    }
+
+    100% {
+        -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+}
+
+/* Movimiento Carta FIN*/

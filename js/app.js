@@ -107,7 +107,7 @@ function apuesta() {
         cartasBanca = [];
         puntosBanca = [];
         coloresObtenidos = [];
-        repartoInicialUser();
+        repartoInicialBanca();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
         document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
@@ -115,6 +115,64 @@ function apuesta() {
     }
 };
 
+function repartoInicialBanca(){
+
+    
+    let cartaRandom = Math.random() * deck.length;
+    cartaRandom = Math.round(cartaRandom);
+
+    let puntosR = 0;
+
+    puntosR = parseInt(deck[cartaRandom].puntos)
+
+    //pusheamos el objeto carta a un array
+    cartasBanca.push(deck[cartaRandom])
+    //pusheamos los puntos obtenidos a un array
+    puntosBanca.push(deck[cartaRandom].puntos)
+    //ordenamos array de mayor a menor
+    puntosBanca.sort( (a, b) => b - a )
+    
+    rutaCartaBanca.innerHTML = "";
+    
+    cartasBanca.forEach(carta => {
+
+        const dibujoCartaBanca = document.createElement("div")
+        dibujoCartaBanca.classList.add("tamañoCarta")
+        
+            dibujoCartaBanca.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+
+
+        rutaCartaBanca.appendChild(dibujoCartaBanca)
+
+    });
+
+    const dibujoCartaBancaX = document.createElement("div")
+    dibujoCartaBancaX.classList.add("card")
+    dibujoCartaBancaX.classList.add("tamañoCartaX")
+    dibujoCartaBancaX.classList.add("animation-target")
+
+    rutaCartaBanca.appendChild(dibujoCartaBancaX)
+
+    manoCrupier = 0;
+
+    for(let i = 0; i < puntosBanca.length; i++){
+
+        //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
+        if(manoCrupier < 11 && puntosBanca[i] == 1){
+            manoCrupier = manoCrupier += 11;
+
+        }else{
+            manoCrupier = manoCrupier += puntosBanca[i];
+        }
+
+    }
+
+    //Quitamos del mazo la carta que obtubimos
+    deck.splice(cartaRandom, 1)
+    repartoInicialUser();
+
+
+}
 
 //Función para entregar cartas al usuario de forma aleatoria
 function repartoInicialUser() {
@@ -147,7 +205,7 @@ function repartoInicialUser() {
         j = j + 1;
         
         if(i == j){
-            dibujoCartaUser.innerHTML = `<div class="card efectoCarta ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+            dibujoCartaUser.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
         }else{
             dibujoCartaUser.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
             }
@@ -229,6 +287,28 @@ do{
     puntosBanca.sort( (a, b) => b - a )
     
     manoCrupier = 0;
+
+    let j = 0;
+    rutaCartaBanca.innerHTML = "";
+    cartasBanca.forEach(carta => {
+
+        const dibujoCartaBanca = document.createElement("div")
+        dibujoCartaBanca.classList.add("tamañoCarta")
+        
+            
+            
+            if(j > 0){
+            dibujoCartaBanca.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+            }else{
+            dibujoCartaBanca.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+            }
+
+            j = j + 1
+
+
+        rutaCartaBanca.appendChild(dibujoCartaBanca)
+
+    });
 
     for(let i = 0; i < puntosBanca.length; i++){
 
