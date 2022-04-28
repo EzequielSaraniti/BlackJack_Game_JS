@@ -307,17 +307,17 @@ h4 {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 0.4fr 1fr 0.4fr 1fr 1fr 0.4fr;
     gap: 0px 0px;
     grid-template-areas:
-        "creditoG creditoG imgFichas imgFichas imgFichas . ."
-        ". . . . . . ."
-        ". cartasBancaG cartasBancaG . puntosBancaG puntosBancaG ."
+        ". . imgFichas imgFichas imgFichas . ."
+        ". cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
+        ". . . puntosBancaG . . ."
         ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
         "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
         ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
         ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
-        ". . . puntosJugadorG . . apostarG";
+        "creditoG creditoG . puntosJugadorG . . apostarG";
 }
 
 .imgFichas {
@@ -339,11 +339,15 @@ h4 {
 
 .cartasBancaG {
     display: flex;
+    justify-content: center;
     grid-area: cartasBancaG;
 }
 
 .puntosBancaG {
     grid-area: puntosBancaG;
+    display: grid;
+    align-content: center;
+    justify-content: center;
 }
 
 .creditoG {
