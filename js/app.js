@@ -41,6 +41,8 @@ function bienvenida() {
 //Función para cargar saldo y comenzar a jugar
 function cargoCredito() {
 
+
+
     if (credito > 0) {
         //Si tu credito es "0", enviamos una alerta (En futuro se reemplazará con una librería)
         alert(`Solo podrás cargar saldo cuando el mismo séa U$0.`);
@@ -115,9 +117,9 @@ function apuesta() {
     }
 };
 
-function repartoInicialBanca(){
+function repartoInicialBanca() {
 
-    
+
     let cartaRandom = Math.random() * deck.length;
     cartaRandom = Math.round(cartaRandom);
 
@@ -130,16 +132,17 @@ function repartoInicialBanca(){
     //pusheamos los puntos obtenidos a un array
     puntosBanca.push(deck[cartaRandom].puntos)
     //ordenamos array de mayor a menor
-    puntosBanca.sort( (a, b) => b - a )
-    
+    puntosBanca.sort((a, b) => b - a)
+
+
     rutaCartaBanca.innerHTML = "";
-    
+
     cartasBanca.forEach(carta => {
 
         const dibujoCartaBanca = document.createElement("div")
         dibujoCartaBanca.classList.add("tamañoCarta")
-        
-            dibujoCartaBanca.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+
+        dibujoCartaBanca.innerHTML = `<div class="card animation-target2 ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
 
 
         rutaCartaBanca.appendChild(dibujoCartaBanca)
@@ -149,21 +152,18 @@ function repartoInicialBanca(){
     const dibujoCartaBancaX = document.createElement("div")
     dibujoCartaBancaX.classList.add("card")
     dibujoCartaBancaX.classList.add("tamañoCartaX")
-    dibujoCartaBancaX.classList.add("animation-target")
+    dibujoCartaBancaX.classList.add("animation-target2")
 
     rutaCartaBanca.appendChild(dibujoCartaBancaX)
 
     manoCrupier = 0;
 
-    for(let i = 0; i < puntosBanca.length; i++){
+    for (let i = 0; i < puntosBanca.length; i++) {
 
         //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
-        if(manoCrupier < 11 && puntosBanca[i] == 1){
-            manoCrupier = manoCrupier += 11;
 
-        }else{
-            manoCrupier = manoCrupier += puntosBanca[i];
-        }
+        //OPERADOR TERNARIO
+        manoCrupier < 11 && puntosBanca[i] == 1 ? manoCrupier = manoCrupier += 11 : manoCrupier = manoCrupier += puntosBanca[i]
 
     }
 
@@ -193,23 +193,23 @@ function repartoInicialUser() {
     //pusheamos los puntos obtenidos a un array
     puntosJugador.push(deck[cartaRandom].puntos)
     //ordenamos array de mayor a menor
-    puntosJugador.sort( (a, b) => b - a )
-    
-    
+    puntosJugador.sort((a, b) => b - a)
+
+
     rutaCartaUser.innerHTML = "";
     let j = 0;
     cartasJugador.forEach(carta => {
 
         const dibujoCartaUser = document.createElement("div")
         dibujoCartaUser.classList.add("tamañoCarta")
-        j = j + 1;
-        
-        if(i == j){
+        j++
+
+        if (i == j) {
             dibujoCartaUser.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
-        }else{
+        } else {
             dibujoCartaUser.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
-            }
-            
+        }
+
 
         // let creoCarta = document.getElementById('cartasPlayer').innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
 
@@ -217,25 +217,21 @@ function repartoInicialUser() {
 
     });
 
-    i = i += 1;
+    i++
 
 
-    
+
     manoUser = 0;
 
-    for(let i = 0; i < puntosJugador.length; i++){
+    for (let i = 0; i < puntosJugador.length; i++) {
 
         //Si el jugador tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
-        if(manoUser < 11 && puntosJugador[i] == 1){
-        manoUser = manoUser += 11;
-
-        }else{
-            manoUser = manoUser += puntosJugador[i];
-        }
+        //OPERADOR TERNARIO
+        manoUser < 11 && puntosJugador[i] == 1 ? manoUser = manoUser += 11 : manoUser = manoUser += puntosJugador[i];
 
     }
 
-        // manoUser = parseInt(manoUser) + parseInt(puntosR);
+    // manoUser = parseInt(manoUser) + parseInt(puntosR);
 
     let puntosX = document.getElementById('puntosPlayer').innerHTML = `<b class="amarillo">${manoUser}</b>`
     // let cartax = document.getElementById('cartasPlayer').innerHTML = `<div class="card black" data-value="K ♠">♠</div>`
@@ -270,71 +266,66 @@ function repartoInicialUser() {
 //Cuando el usuario termina de pedir cartas, con esta función repartimos las cartas del crupier.
 function repartoCrupier() {
 
-do{
-    //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
-    let cartaRandom = Math.random() * deck.length;
-    cartaRandom = Math.round(cartaRandom);
+    do {
+        //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
+        let cartaRandom = Math.random() * deck.length;
+        cartaRandom = Math.round(cartaRandom);
 
-    let puntosR = 0;
+        let puntosR = 0;
 
-    puntosR = parseInt(deck[cartaRandom].puntos)
+        puntosR = parseInt(deck[cartaRandom].puntos)
 
-    //pusheamos el objeto carta a un array
-    cartasBanca.push(deck[cartaRandom])
-    //pusheamos los puntos obtenidos a un array
-    puntosBanca.push(deck[cartaRandom].puntos)
-    //ordenamos array de mayor a menor
-    puntosBanca.sort( (a, b) => b - a )
-    
-    manoCrupier = 0;
+        //pusheamos el objeto carta a un array
+        cartasBanca.push(deck[cartaRandom])
+        //pusheamos los puntos obtenidos a un array
+        puntosBanca.push(deck[cartaRandom].puntos)
+        //ordenamos array de mayor a menor
+        puntosBanca.sort((a, b) => b - a)
 
-    let j = 0;
-    rutaCartaBanca.innerHTML = "";
-    cartasBanca.forEach(carta => {
+        manoCrupier = 0;
 
-        const dibujoCartaBanca = document.createElement("div")
-        dibujoCartaBanca.classList.add("tamañoCarta")
-        
-            
-            
-            if(j > 0){
-            dibujoCartaBanca.innerHTML = `<div class="card animation-target ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
-            }else{
-            dibujoCartaBanca.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+        let j = 0;
+        rutaCartaBanca.innerHTML = "";
+        cartasBanca.forEach(carta => {
+
+            const dibujoCartaBanca = document.createElement("div")
+            dibujoCartaBanca.classList.add("tamañoCarta")
+
+
+
+            if (j > 0) {
+                dibujoCartaBanca.innerHTML = `<div class="card animation-target2 ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
+            } else {
+                dibujoCartaBanca.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
             }
 
-            j = j + 1
+            j++
 
 
-        rutaCartaBanca.appendChild(dibujoCartaBanca)
+            rutaCartaBanca.appendChild(dibujoCartaBanca)
 
-    });
+        });
 
-    for(let i = 0; i < puntosBanca.length; i++){
+        for (let i = 0; i < puntosBanca.length; i++) {
 
-        //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
-        if(manoCrupier < 11 && puntosBanca[i] == 1){
-            manoCrupier = manoCrupier += 11;
-
-        }else{
-            manoCrupier = manoCrupier += puntosBanca[i];
+            //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
+            //OPERADOR TERNARIO
+            manoCrupier < 11 && puntosBanca[i] == 1 ? manoCrupier = manoCrupier += 11 : manoCrupier = manoCrupier += puntosBanca[i]
         }
 
+        //Quitamos del mazo la carta que obtubimos
+        deck.splice(cartaRandom, 1)
+
+    } while (manoCrupier <= 17)
+
+
+    if (manoCrupier >= 17) {
+        quienGana()
     }
 
-    //Quitamos del mazo la carta que obtubimos
-    deck.splice(cartaRandom, 1)
-
-}while (manoCrupier <= 17)
-
-
-if (manoCrupier >= 17){
-    quienGana()
 }
 
-}
-
-function quienGana(){
+function quienGana() {
 
     //Condicional si el crupier gana
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
