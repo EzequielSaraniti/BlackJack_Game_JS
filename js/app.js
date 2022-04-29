@@ -57,7 +57,12 @@ function cargoCredito() {
 
         if (credito != parseInt(credito)) {
             //Si ingresaste un valor inválido, enviamos una alerta (En futuro se reemplazará con una librería)
-            alert(`Ingresaste un valor inválido`);
+            swal({
+                title: "Valor ingresado inválido!",
+                text: "Ingresa solo numeros Ej: 500!",
+                icon: "warning",
+                button: "Volver",
+              });
             break
         } else
             document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
