@@ -185,9 +185,10 @@ h4 {
     font-size: 1.1rem;
     background-color: rgba(0, 0, 0, 0.534);
     border: solid rgba(161, 161, 161, 0.5) 1px;
-    padding: 4px 15px 4px 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 10px 10px 10px 10px;
     color: white;
+    text-align: center;
 }
 
 .cartasPlayer {
@@ -229,22 +230,8 @@ h4 {
     justify-content: space-around;
 }
 
-#pidoCarta {
-    font-size: 1.2rem;
-    width: 110px;
-    background-color: rgba(30, 180, 35, 0.685);
-    color: white;
-}
-
-#noPido {
-    font-size: 1.2rem;
-    width: 110px;
-    background-color: rgba(180, 40, 30, 0.685);
-    color: white;
-}
-
 .boxCredito {
-    width: 140px;
+    width: 80px;
     margin-right: 30px;
     text-shadow: 1px 1px 2px black;
     font-size: 0.8rem;
@@ -307,14 +294,13 @@ h4 {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 0.4fr 1fr 0.4fr 1fr 1fr 0.4fr;
+    grid-template-rows: 1fr 1fr 0.4fr 1fr 1fr 1fr 0.4fr;
     gap: 0px 0px;
     grid-template-areas:
         ". . imgFichas imgFichas imgFichas . ."
         ". cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
         ". . . puntosBancaG . . ."
         ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
-        "AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG AlertaG"
         ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
         ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
         "creditoG creditoG . puntosJugadorG . . apostarG";
@@ -598,14 +584,6 @@ footer {
 
 .footer-menu ul li a:hover {
     color: #27bcda;
-}
-
-@media (max-width: 500px) {
-    .footer-menu ul {
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
 }
 
 /* AGREGAMOS EFECTO BUTTON */
@@ -1289,5 +1267,214 @@ footer {
     100% {
         -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+}
+
+/* BOTON PEDIR O NO PEDIR */
+
+:root {
+    --bg: #3C465C;
+    --primary: #9b538a;
+    --solid: #fff;
+    --btn-w: 10em;
+    --dot-w: calc(var(--btn-w)*.2);
+    --tr-X: calc(var(--btn-w) - var(--dot-w));
+}
+
+.btnEfect {
+    box-sizing: border-box;
+}
+
+.btnEfect:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.btnEfect {
+    position: relative;
+    margin: 0 auto;
+    width: var(--btn-w);
+    color: var(--primary);
+    border: .15em solid var(--primary);
+    border-radius: 5em;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 2em;
+    cursor: pointer;
+}
+
+.dot {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: var(--dot-w);
+    height: 100%;
+    border-radius: 100%;
+    transition: all 300ms ease;
+    display: none;
+}
+
+.dot:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - .4em);
+    top: -.4em;
+    height: .8em;
+    width: .8em;
+    background: var(--primary);
+    border-radius: 1em;
+    border: .25em solid var(--solid);
+    box-shadow: 0 0 .7em var(--solid),
+        0 0 2em var(--primary);
+}
+
+.btnEfect:hover .dot,
+.btnEfect:focus .dot {
+    animation: atom 2s infinite linear;
+    display: block;
+}
+
+@keyframes atom {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+
+    30% {
+        transform: translateX(var(--tr-X)) rotate(0);
+    }
+
+    50% {
+        transform: translateX(var(--tr-X)) rotate(180deg);
+    }
+
+    80% {
+        transform: translateX(0) rotate(180deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(360deg);
+    }
+}
+
+/* BOTON PEDIR O NO PEDIR FIN */
+
+.backgroundPido {
+    background-color: rgb(79, 201, 49);
+    border-color: rgb(189, 189, 189);
+    color: rgb(255, 255, 255);
+}
+
+.backgroundNoPido {
+    background-color: rgb(201, 49, 49);
+    border-color: rgb(189, 189, 189);
+    color: rgb(255, 255, 255);
+}
+
+
+@media (max-width: 500px) {
+    :root {
+        --bg: #3C465C;
+        --primary: #9b538a;
+        --solid: #fff;
+        --btn-w: 7em;
+        --dot-w: calc(var(--btn-w)*.2);
+        --tr-X: calc(var(--btn-w) - var(--dot-w));
+    }
+
+    .footer-menu ul {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        width: 54px;
+        height: 80px;
+        background-color: white;
+    }
+
+    .btnEfect {
+        position: relative;
+        margin: 0 auto;
+        width: 7em;
+        border: .15em solid var(--primary);
+        border-radius: 5em;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1em;
+        line-height: 2em;
+        cursor: pointer;
+    }
+
+    .dot {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -20px;
+        width: 4em;
+        height: 100%;
+        border-radius: 100%;
+        transition: all 300ms ease;
+        display: none;
+    }
+    
+    .dot:after {
+        content: '';
+        position: absolute;
+        left: calc(50% - .4em);
+        top: -.4em;
+        height: .8em;
+        width: .8em;
+        background: var(--primary);
+        border-radius: 1em;
+        border: .25em solid var(--solid);
+        box-shadow: 0 0 .7em var(--solid),
+            0 0 2em var(--primary);
+    }
+
+    .imgFichasStyle{
+        width: 80%;
+        height: 40%;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 0.4fr 1fr 1fr 1fr 0.4fr;
+        gap: 0px 0px;
+        grid-template-areas:
+            ". imgFichas imgFichas imgFichas imgFichas imgFichas ."
+            ". cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
+            ". puntosBancaG puntosBancaG puntosBancaG puntosBancaG puntosBancaG ."
+            ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
+            "pedirCartaG pedirCartaG pedirCartaG . noPedirG noPedirG noPedirG"
+            ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
+            "creditoG puntosJugadorG puntosJugadorG puntosJugadorG puntosJugadorG puntosJugadorG apostarG";
+    }
+
+    .titleP .titleC {
+        font: 700 3em/1 "Oswald", sans-serif;
+        letter-spacing: 0;
+        padding: 0.25em 0 0.325em;
+        display: block;
+        margin: 0 auto;
+        text-shadow: 0 0 80px rgb(255 255 255);
+        background: url(../img/animated-text-fill.png) repeat-y;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: aitf 80s linear infinite;
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
     }
 }

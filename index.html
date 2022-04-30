@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/style.css" />
     <title>Blackjack Wind</title>
 </head>
@@ -60,11 +61,17 @@
 
             <div id="MensajeFinal" class="AlertaG"></div>
 
-            <div class="pedirCartaG">
-                <button id="pidoCarta">Pedir Carta</button>
+            <div id="pidoCarta" class="pedirCartaG">
+                <div class="btnEfect backgroundPido">
+                    <span>Pedir Carta</span>
+                    <div class="dot"></div>
+                </div>
             </div>
-            <div class="noPedirG">
-                <button id="noPido">No pedir</button>
+            <div id="noPido" class="noPedirG">
+                <div class="btnEfect backgroundNoPido">
+                    <span>No Pedir</span>
+                    <div class="dot"></div>
+                </div>
             </div>
 
             <div class="cartaJugadorG" id="cartasPlayer">
@@ -115,6 +122,7 @@
         </footer>
     </footer>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/variables.js"></script>
     <script src="./js/deck.js"></script>

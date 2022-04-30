@@ -41,31 +41,26 @@ function bienvenida() {
 //Función para cargar saldo y comenzar a jugar
 function cargoCredito() {
 
-
-
-    if (credito > 0) {
-        //Si tu credito es "0", enviamos una alerta (En futuro se reemplazará con una librería)
-        alert(`Solo podrás cargar saldo cuando el mismo séa U$0.`);
-    }
-
     //Cargamos crédito, si el usuario quiere usar String o numeros con comas, volverá al bucle
     while ((credito <= 0) | (credito != parseInt(credito))) {
 
         let creditoCarga = document.getElementById('cargoCredito').value
 
-        credito = credito + parseInt(creditoCarga)
 
-        if (credito != parseInt(credito)) {
+
+        if (isNaN(creditoCarga)) {
             //Si ingresaste un valor inválido, enviamos una alerta (En futuro se reemplazará con una librería)
             swal({
                 title: "Valor ingresado inválido!",
                 text: "Ingresa solo numeros Ej: 500!",
                 icon: "warning",
                 button: "Volver",
-              });
+            });
             break
         } else
-            document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
+
+            credito = credito + parseInt(creditoCarga)
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
         document.getElementById("alertaCredito").style.display = "none"; // show
         document.getElementById("cargoCred").style.visibility = "hidden"; // show
         document.getElementById("apostarG").style.visibility = "visible"; // sho
@@ -87,10 +82,14 @@ function apuesta() {
 
     //Si tenemos 0 saldo, enviamos una alerta (En futuro se reemplazará con una librería).
     if (credito <= 0) {
-        alert("Te quedaste sin saldo, a continuación podrás cargar saldo.")
+        swal({
+            title: "No tienes saldo!",
+            text: "A continuación podrás cargar saldo..",
+            icon: "warning",
+            button: "Aceptar",
+        });
 
         document.getElementById("cargoCred").style.visibility = "visible"; // show
-        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
         document.getElementById("apostarG").style.visibility = "hidden"; // show
 
         return
@@ -102,10 +101,16 @@ function apuesta() {
     //Si no tenemos saldo para cubrir el monto apostado, enviamos una alerta (En futuro se reemplazará con una librería)
     if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))) {
 
-        alert("Apostaste mas dinero del que tienes o un valor incorrecto.. Vuelve a apostar")
+        swal({
+            title: "No tienes suficiente saldo!",
+            text: "Apuesta el dinero que tienes, no empeñes tus cosas..",
+            icon: "warning",
+            button: "Volver",
+        });
 
     } else {
 
+        
         i = 1;
         manoUser = 0;
         manoCrupier = 0;
@@ -117,8 +122,7 @@ function apuesta() {
         repartoInicialBanca();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
-        document.getElementById("MensajeFinal").style.visibility = "hidden"; // show
-        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b></b>`
+        document.getElementById('puntosBanca').innerHTML = ""
     }
 };
 
@@ -130,7 +134,24 @@ function repartoInicialBanca() {
 
     let puntosR = 0;
 
-    puntosR = parseInt(deck[cartaRandom].puntos)
+    //Desestructuración (Lo aplico para cumplir con la entrega)
+    //Carta obtenida por la banca
+    const {
+        palo: PaloCarta,
+        valor: ValorCarta,
+        puntos: PuntosCarta,
+        color: ColorCarta
+    } = deck[cartaRandom]
+
+    console.log(PaloCarta)
+    console.log(ValorCarta)
+    console.log(PuntosCarta)
+    console.log(ColorCarta)
+    //Desestructuración
+
+
+    //Aplico variable de desestructiración
+    puntosR = parseInt(PuntosCarta)
 
     //pusheamos el objeto carta a un array
     cartasBanca.push(deck[cartaRandom])
@@ -138,6 +159,8 @@ function repartoInicialBanca() {
     puntosBanca.push(deck[cartaRandom].puntos)
     //ordenamos array de mayor a menor
     puntosBanca.sort((a, b) => b - a)
+
+
 
 
     rutaCartaBanca.innerHTML = "";
@@ -163,14 +186,16 @@ function repartoInicialBanca() {
 
     manoCrupier = 0;
 
-    for (let i = 0; i < puntosBanca.length; i++) {
+    
 
         //Si la banca tiene un "A", puede vale 1 o 11, según los puntos que tiene el mismo.
 
         //OPERADOR TERNARIO
-        manoCrupier < 11 && puntosBanca[i] == 1 ? manoCrupier = manoCrupier += 11 : manoCrupier = manoCrupier += puntosBanca[i]
+        manoCrupier < 11 && puntosBanca[0] == 1 ? manoCrupier = manoCrupier += 11 : manoCrupier = manoCrupier += puntosBanca[0]
 
-    }
+        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
+
+    
 
     //Quitamos del mazo la carta que obtubimos
     deck.splice(cartaRandom, 1)
@@ -253,8 +278,16 @@ function repartoInicialUser() {
 
     if (manoUser > 21) {
 
-        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares</b>`
+        Toastify({
+            text: `Superaste los 21 puntos, PERDISTE: ${apuestaJugador} Dolares`,
+            className: "info",
+            duration: 5000,
+            position: "center", // `left`, `center` or `right`,
+            style: {
+                background: "linear-gradient(to right, #B80808, #BB6363)",
+            }
+        }).showToast();
+
         credito = parseInt(credito) - parseInt(apuestaJugador)
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
 
@@ -271,7 +304,9 @@ function repartoInicialUser() {
 //Cuando el usuario termina de pedir cartas, con esta función repartimos las cartas del crupier.
 function repartoCrupier() {
 
-    do {
+        document.getElementById("pidoCarta").style.visibility = "hidden"; // show
+        document.getElementById("noPido").style.visibility = "hidden"; // show
+    
         //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
         let cartaRandom = Math.random() * deck.length;
         cartaRandom = Math.round(cartaRandom);
@@ -287,29 +322,31 @@ function repartoCrupier() {
         //ordenamos array de mayor a menor
         puntosBanca.sort((a, b) => b - a)
 
+        //Aplicamos Spread para ver los valores de las cartas poseídas de la banca. (Solo para cumplir con la entrega).
+        console.log(...puntosBanca)
+
         manoCrupier = 0;
 
-        let j = 0;
+        
         rutaCartaBanca.innerHTML = "";
+        let j = 1;
         cartasBanca.forEach(carta => {
 
             const dibujoCartaBanca = document.createElement("div")
             dibujoCartaBanca.classList.add("tamañoCarta")
 
-
-
-            if (j > 0) {
+            if (cartasBanca.length == j && cartasBanca.length > 2) {
                 dibujoCartaBanca.innerHTML = `<div class="card animation-target2 ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
             } else {
                 dibujoCartaBanca.innerHTML = `<div class="card ${carta.color}" data-value="${carta.valor} ${carta.palo}">${carta.palo}</div>`
             }
 
-            j++
-
 
             rutaCartaBanca.appendChild(dibujoCartaBanca)
-
+            j++
         });
+
+        
 
         for (let i = 0; i < puntosBanca.length; i++) {
 
@@ -321,23 +358,40 @@ function repartoCrupier() {
         //Quitamos del mazo la carta que obtubimos
         deck.splice(cartaRandom, 1)
 
-    } while (manoCrupier <= 17)
-
+    
+    let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
 
     if (manoCrupier >= 17) {
         quienGana()
+    } else{
+        temporizadorDeRetraso()
     }
 
 }
+
+let identificadorTiempoDeEspera;
+
+function temporizadorDeRetraso() {
+    identificadorTiempoDeEspera = setTimeout(repartoCrupier, 3000);
+}
+
 
 function quienGana() {
 
     //Condicional si el crupier gana
     if ((manoCrupier > manoUser) && (manoCrupier < 22)) {
-        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
 
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="rojo">El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares</b>`
+
+        Toastify({
+            text: `El crupier obtuvo ${manoCrupier} puntos, la casa gana!! Perdiste ${apuestaJugador} Dolares!`,
+            className: "info",
+            duration: 5000,
+            position: "center", // `left`, `center` or `right`,
+            style: {
+            background: "linear-gradient(to right, #B80808, #BB6363)",
+            }
+        }).showToast();
 
         credito = parseInt(credito) - parseInt(apuestaJugador)
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
@@ -345,10 +399,18 @@ function quienGana() {
 
     //Condicional si tu ganas
     if ((manoCrupier < manoUser) | (manoCrupier > 21)) {
-        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
 
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b class="verde">El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!</b>`
+
+        Toastify({
+            text: `El crupier obtuvo ${manoCrupier} puntos, tu ganas, felicidades ganaste ${apuestaJugador} Dolares!!!`,
+            className: "info",
+            duration: 5000,
+            position: "center", // `left`, `center` or `right`,
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+        }).showToast();
 
         credito = parseInt(credito) + parseInt(apuestaJugador)
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
@@ -356,17 +418,23 @@ function quienGana() {
 
     //Condicional si empatas con el crupier
     if (manoCrupier == manoUser) {
-        document.getElementById("MensajeFinal").style.visibility = "visible"; // show
 
         let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
-        let Mensaje = document.getElementById('MensajeFinal').innerHTML = `<b>El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!</b>`
+
+        Toastify({
+            text: `El crupier obtuvo ${manoCrupier} puntos, tenemos un empate, se devuele el monto de ${apuestaJugador} Dolares!!!`,
+            className: "info",
+            duration: 5000,
+            position: "center", // `left`, `center` or `right`,
+            style: {
+                background: "linear-gradient(to right, #3F526E, #4A75B4)",
+            }
+        }).showToast();
 
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
     }
 
     //Sacamos de la vista botones de pedir cartas y volvemos a habilitar las apuestas
-    document.getElementById("pidoCarta").style.visibility = "hidden"; // show
-    document.getElementById("noPido").style.visibility = "hidden"; // show
     document.getElementById("apuestaJugador").style.visibility = "visible"; // show
     document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
 
