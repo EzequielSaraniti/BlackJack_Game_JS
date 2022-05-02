@@ -372,7 +372,7 @@ function repartoCrupier() {
 let identificadorTiempoDeEspera;
 
 function temporizadorDeRetraso() {
-    identificadorTiempoDeEspera = setTimeout(repartoCrupier, 3000);
+    identificadorTiempoDeEspera = setTimeout(repartoCrupier, 1500);
 }
 
 
