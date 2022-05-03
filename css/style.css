@@ -12,7 +12,7 @@
 }
 
 html {
-    background-color: rgb(0, 70, 0);
+    background-color: rgb(32, 43, 32);
 }
 
 header {
@@ -80,7 +80,7 @@ h1 {
 }
 
 #aparece {
-    background-image: url(../img/mesa-black.png);
+    background-image: url(../img/mesa-black1.png);
     background-size: cover;
     background-repeat: no-repeat;
     visibility: hidden;
@@ -88,7 +88,7 @@ h1 {
     transition: all 2s;
     width: auto;
     height: auto;
-    margin: 50px 0px 0px 0px;
+    margin: 25px 0px 25px 0px;
 }
 
 
