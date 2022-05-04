@@ -129,29 +129,10 @@ function apuesta() {
 function repartoInicialBanca() {
 
 
-    let cartaRandom = Math.random() * deck.length;
+    let cartaRandom = Math.random() * deck.length-1;
     cartaRandom = Math.round(cartaRandom);
 
     let puntosR = 0;
-
-    //Desestructuración (Lo aplico para cumplir con la entrega)
-    //Carta obtenida por la banca
-    const {
-        palo: PaloCarta,
-        valor: ValorCarta,
-        puntos: PuntosCarta,
-        color: ColorCarta
-    } = deck[cartaRandom]
-
-    console.log(PaloCarta)
-    console.log(ValorCarta)
-    console.log(PuntosCarta)
-    console.log(ColorCarta)
-    //Desestructuración
-
-
-    //Aplico variable de desestructiración
-    puntosR = parseInt(PuntosCarta)
 
     //pusheamos el objeto carta a un array
     cartasBanca.push(deck[cartaRandom])
@@ -207,7 +188,7 @@ function repartoInicialBanca() {
 //Función para entregar cartas al usuario de forma aleatoria
 function repartoInicialUser() {
 
-    let cartaRandom = Math.random() * deck.length;
+    let cartaRandom = Math.random() * deck.length-1;
     cartaRandom = Math.round(cartaRandom);
 
     let puntosR = 0;
@@ -308,7 +289,7 @@ function repartoCrupier() {
         document.getElementById("noPido").style.visibility = "hidden"; // show
     
         //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
-        let cartaRandom = Math.random() * deck.length;
+        let cartaRandom = Math.random() * deck.length-1;
         cartaRandom = Math.round(cartaRandom);
 
         let puntosR = 0;
@@ -321,9 +302,6 @@ function repartoCrupier() {
         puntosBanca.push(deck[cartaRandom].puntos)
         //ordenamos array de mayor a menor
         puntosBanca.sort((a, b) => b - a)
-
-        //Aplicamos Spread para ver los valores de las cartas poseídas de la banca. (Solo para cumplir con la entrega).
-        console.log(...puntosBanca)
 
         manoCrupier = 0;
 
