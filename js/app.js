@@ -12,8 +12,82 @@ if (localStorage.getItem("userLog") == "true") {
     document.getElementById("IngresoUser").style.display = "none"; // show
 }
 
+let data = []
+
+const listadoMejores = async() => {
+
+    const resp = await fetch("./js/best.json")
+    data = await resp.json()
+    data.sort((a, b) => b.puntosW - a.puntosW)
+
+    fetch("./js/best.json")
+    .then(resp => resp.json())
+    .then( data => {
+        html = ""
+        data.forEach(mejores => {
+            html += `
+                <p class="white"><b>${mejores.nombreW}</b>: ${mejores.puntosW}</p>
+            `
+        });
+        listaMejores.innerHTML = html
+    })
+}
+
+listadoMejores()
+
+
+function agregoMejores(){
+
+    //Creamos objeto a agregar en Array
+    objMejores = {
+    nombreW: nombre,
+    puntosW: credito
+    }
+
+    //Variable que define si ya agregamos el nombre de usuario al ranking
+    let seAgrego = 0
+
+    //Recorremos array para ver el ranking
+    data.forEach(elemento => {
+
+        //Variable para conocer el numero de index
+        let i = data.indexOf( elemento );
+
+        //Si el nombre esta dentro del ranking y sus puntos son mayores, borramos el objeto del array y lo volvemos a guardar con el nuevo puntaje
+        if (elemento.nombreW === nombre && elemento.puntosW <= credito){
+            data.splice(i, 1)
+            data.push(objMejores)
+            seAgrego = 1
+            return
+        //Si el puntaje del array ya es mayor al que tenemos, salimos del condicional sin realizar acciones.
+        } else if(elemento.nombreW == nombre && elemento.puntosW >= credito){
+            seAgrego = 1
+            return
+        }
+    })
+
+    //En caso de que el nombre de usuario es nuevo, agregamos el nombre al listado.
+    if (seAgrego == 0) {
+        data.push(objMejores)
+    }
+
+    data.sort((a, b) => b.puntosW - a.puntosW)
+
+    html = ""
+    data.forEach(mejores => {
+        html += `
+            <p class="white"><b>${mejores.nombreW}</b>: ${mejores.puntosW}</p>
+        `
+    });
+    listaMejores.innerHTML = html
+
+}
+
+
+
 //Esta función es el logout del usuario
 function logoutUser() {
+    agregoMejores()
     localStorage.removeItem("nombreUser")
     localStorage.removeItem("userLog")
     location.reload()
@@ -41,23 +115,10 @@ function bienvenida() {
 //Función para cargar saldo y comenzar a jugar
 function cargoCredito() {
 
-    //Cargamos crédito, si el usuario quiere usar String o numeros con comas, volverá al bucle
+    //Cargamos crédito.
     while ((credito <= 0) | (credito != parseInt(credito))) {
 
-        let creditoCarga = document.getElementById('cargoCredito').value
-
-
-
-        if (isNaN(creditoCarga)) {
-            //Si ingresaste un valor inválido, enviamos una alerta (En futuro se reemplazará con una librería)
-            swal({
-                title: "Valor ingresado inválido!",
-                text: "Ingresa solo numeros Ej: 500!",
-                icon: "warning",
-                button: "Volver",
-            });
-            break
-        } else
+        let creditoCarga = 100
 
             credito = credito + parseInt(creditoCarga)
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
@@ -119,6 +180,7 @@ function apuesta() {
         cartasBanca = [];
         puntosBanca = [];
         coloresObtenidos = [];
+        document.getElementById('saldoUser').innerHTML = ` U$ ${credito - apuestaJugador}`
         repartoInicialBanca();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
@@ -415,5 +477,7 @@ function quienGana() {
     //Sacamos de la vista botones de pedir cartas y volvemos a habilitar las apuestas
     document.getElementById("apuestaJugador").style.visibility = "visible"; // show
     document.getElementById("apuestaJugadorBtn").style.visibility = "visible"; // show
+
+    agregoMejores()
 
 }

@@ -13,6 +13,7 @@ let userLog = false
 let puntosJugador = [];
 let puntosBanca = [];
 let i = 1;
+let archivo = ""
 
 //Variables que interactuan con el HTML
 const btnJugar = document.getElementById('jugar')
@@ -23,3 +24,4 @@ const noPedir = document.getElementById('noPido')
 const loginUser = document.getElementById('logUser')
 const rutaCartaUser = document.getElementById("cartasPlayer")
 const rutaCartaBanca = document.getElementById("cartasBanca")
+const listaMejores = document.querySelector("#listado")

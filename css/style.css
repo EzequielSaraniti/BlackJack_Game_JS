@@ -79,6 +79,10 @@ h1 {
     text-shadow: 1px 1px 2px black;
 }
 
+.white{
+    color: white;
+}
+
 #aparece {
     background-image: url(../img/mesa-black1.png);
     background-size: cover;
@@ -297,13 +301,17 @@ h4 {
     grid-template-rows: 1fr 1fr 0.4fr 1fr 1fr 1fr 0.4fr;
     gap: 0px 0px;
     grid-template-areas:
-        ". . imgFichas imgFichas imgFichas . ."
-        ". cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
-        ". . . puntosBancaG . . ."
+        "mejores . imgFichas imgFichas imgFichas . ."
+        "mejores cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
+        "mejores . . puntosBancaG . . ."
         ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
         ". pedirCartaG pedirCartaG . noPedirG noPedirG apostarG"
         ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
         "creditoG creditoG . puntosJugadorG . . apostarG";
+}
+
+.mejores{
+    grid-area: mejores;
 }
 
 .imgFichas {
@@ -1453,9 +1461,9 @@ footer {
         grid-template-rows: 1fr 1fr 0.4fr 1fr 1fr 1fr 0.4fr;
         gap: 0px 0px;
         grid-template-areas:
-            ". imgFichas imgFichas imgFichas imgFichas imgFichas ."
-            ". cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
-            ". puntosBancaG puntosBancaG puntosBancaG puntosBancaG puntosBancaG ."
+            "mejores . imgFichas imgFichas imgFichas . ."
+            "mejores cartasBancaG cartasBancaG cartasBancaG cartasBancaG cartasBancaG ."
+            "mejores puntosBancaG puntosBancaG puntosBancaG puntosBancaG puntosBancaG ."
             ". . cargoCreditoG cargoCreditoG cargoCreditoG . ."
             "pedirCartaG pedirCartaG pedirCartaG . noPedirG noPedirG noPedirG"
             ". cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG cartaJugadorG apostarG"
@@ -1477,4 +1485,23 @@ footer {
         -webkit-transform: translate3d(0, 0, 0);
         -webkit-backface-visibility: hidden;
     }
+}
+
+.mejores{
+    margin-top: 34px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 105px;
+    height: auto;
+    background-color: #0000006e;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    border: rgb(61, 61, 61) 3px solid;
+}
+
+.white{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-top: white solid 1px;
 }
