@@ -1,8 +1,8 @@
 
 [
-    {"nombreW":"Juan", "puntosW": 120},
-    {"nombreW":"Carlos", "puntosW": 150},
-    {"nombreW":"Wind", "puntosW": 160},
+    {"nombreW":"Juan", "puntosW": 150},
+    {"nombreW":"Carlos", "puntosW": 120},
+    {"nombreW":"Wind", "puntosW": 110},
     {"nombreW":"Sasa", "puntosW": 50},
     {"nombreW":"Pedro", "puntosW": 40},
     {"nombreW":"Angel", "puntosW": 20}

@@ -14,6 +14,7 @@ if (localStorage.getItem("userLog") == "true") {
 
 let data = []
 
+//Consigna de Async - Await
 const listadoMejores = async() => {
 
     const resp = await fetch("./js/best.json")
