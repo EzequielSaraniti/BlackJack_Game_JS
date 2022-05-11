@@ -4,25 +4,24 @@
 if (localStorage.getItem("userLog") == "true") {
     nombre = localStorage.getItem("nombreUser")
 
-    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button onclick="logoutUser();">Logout</button>`
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button class="logOut" onclick="logoutUser();">Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
-    document.getElementById("aparece").style.visibility = "visible"; // show
-    document.getElementById("aparece").style.opacity = 1; // show
+    loading()
     document.getElementById("IngresoUser").style.display = "none"; // show
 }
 
-let data = []
+
+
 
 //Consigna de Async - Await
-const listadoMejores = async() => {
+listadoMejores = async() => {
 
     const resp = await fetch("./js/best.json")
     data = await resp.json()
-    data.sort((a, b) => b.puntosW - a.puntosW)
 
     fetch("./js/best.json")
-    .then(resp => resp.json())
+    .then(resp => resp.json()) 
     .then( data => {
         html = ""
         data.forEach(mejores => {
@@ -32,12 +31,35 @@ const listadoMejores = async() => {
         });
         listaMejores.innerHTML = html
     })
+} 
+
+
+if(sapo == null){
+    listadoMejores()
+}else{
+    mejoresDataBase()
 }
 
-listadoMejores()
+
+
+function mejoresDataBase(){
+
+    data = sapo
+
+    html = ""
+    sapo.forEach(mejores => {
+        html += `
+            <p class="white"><b>${mejores.nombreW}</b>: ${mejores.puntosW}</p>
+        `
+    });
+    listaMejores.innerHTML = html
+    
+}
 
 
 function agregoMejores(){
+
+    localStorage.removeItem("mejoresUser")
 
     //Creamos objeto a agregar en Array
     objMejores = {
@@ -73,6 +95,9 @@ function agregoMejores(){
     }
 
     data.sort((a, b) => b.puntosW - a.puntosW)
+    
+    localStorage.setItem("mejoresUser", JSON.stringify(data))
+
 
     html = ""
     data.forEach(mejores => {
@@ -88,7 +113,6 @@ function agregoMejores(){
 
 //Esta función es el logout del usuario
 function logoutUser() {
-    agregoMejores()
     localStorage.removeItem("nombreUser")
     localStorage.removeItem("userLog")
     location.reload()
@@ -101,17 +125,29 @@ function bienvenida() {
     localStorage.setItem("nombreUser", nombre)
     localStorage.setItem("userLog", userLog)
 
+    loading()
 
-    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button onclick="logoutUser();">Logout</button>`
+    const bienvenidaHtml = document.getElementById('bienvenida').innerHTML = `<h2>Usuario: <b class="nombreUser">${nombre}</b></h2> <button class="logOut" onclick="logoutUser();">Logout</button>`
     const cargocredito = document.getElementById('alertaCredito').innerHTML = `<p>Carga crèdito para comenzar a jugar!</p>`
 
-    document.getElementById("aparece").style.visibility = "visible"; // show
-    document.getElementById("aparece").style.opacity = 1; // show
+
     document.getElementById("IngresoUser").style.display = "none"; // show
 
 }
 
+function loading(){
+    
+        let element = document.getElementById("load")
+        element.classList.add("loader")
+        
+    setTimeout(finloading, 3000)
+}
 
+function finloading(){
+    document.getElementById("load").classList.remove("loader")
+    document.getElementById("aparece").style.visibility = "visible"; // show
+    document.getElementById("aparece").style.opacity = 1; // show
+}
 
 //Función para cargar saldo y comenzar a jugar
 function cargoCredito() {
