@@ -11,6 +11,9 @@ if (localStorage.getItem("userLog") == "true") {
     document.getElementById("IngresoUser").style.display = "none"; // show
 }
 
+const musicP = new Audio('../sound/musica.mp3');
+musicP.play();
+
 
 
 
@@ -135,18 +138,22 @@ function bienvenida() {
 
 }
 
+//Efecto cargando
 function loading(){
     
         let element = document.getElementById("load")
         element.classList.add("loader")
         
-    setTimeout(finloading, 3000)
+    setTimeout(finloading, 1500)
 }
 
+//FIN Efecto cargando
 function finloading(){
     document.getElementById("load").classList.remove("loader")
     document.getElementById("aparece").style.visibility = "visible"; // show
     document.getElementById("aparece").style.opacity = 1; // show
+    document.getElementById("puntosBancaGa").style.display = "none"; // show
+    document.getElementById("puntosPlayerGa").style.display = "none"; // show
 }
 
 //Función para cargar saldo y comenzar a jugar
@@ -178,6 +185,7 @@ function apuesta() {
         armoDeck();
     }
 
+
     //Si tenemos 0 saldo, enviamos una alerta (En futuro se reemplazará con una librería).
     if (credito <= 0) {
         swal({
@@ -197,7 +205,7 @@ function apuesta() {
     apuestaJugador = parseInt(apuestaJugadorInp)
 
     //Si no tenemos saldo para cubrir el monto apostado, enviamos una alerta (En futuro se reemplazará con una librería)
-    if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador))) {
+    if ((apuestaJugador > credito) | (apuestaJugador != parseInt(apuestaJugador)) | (apuestaJugador == 0)) {
 
         swal({
             title: "No tienes suficiente saldo!",
@@ -217,11 +225,13 @@ function apuesta() {
         cartasBanca = [];
         puntosBanca = [];
         coloresObtenidos = [];
+        document.getElementById("puntosBancaGa").style.display = "block"; // show
+        document.getElementById("puntosPlayerGa").style.display = "block"; // show
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito - apuestaJugador}`
+        document.getElementById('puntosBanca').innerHTML = ""
         repartoInicialBanca();
         document.getElementById("apuestaJugador").style.visibility = "hidden"; // show
         document.getElementById("apuestaJugadorBtn").style.visibility = "hidden"; // show
-        document.getElementById('puntosBanca').innerHTML = ""
     }
 };
 
@@ -273,12 +283,11 @@ function repartoInicialBanca() {
         //OPERADOR TERNARIO
         manoCrupier < 11 && puntosBanca[0] == 1 ? manoCrupier = manoCrupier += 11 : manoCrupier = manoCrupier += puntosBanca[0]
 
-        let puntosX = document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
-
     
 
     //Quitamos del mazo la carta que obtubimos
     deck.splice(cartaRandom, 1)
+    document.getElementById('puntosBanca').innerHTML = `<b>${manoCrupier}</b>`
     repartoInicialUser();
 
 
@@ -296,6 +305,9 @@ function repartoInicialUser() {
     let paloC = deck[cartaRandom].palo
     let valorC = deck[cartaRandom].valor
     let colorC = deck[cartaRandom].color
+
+    const music = new Audio('../sound/Cards-6010_56_4_preview.wav');
+    music.play();
 
 
     //pusheamos el objeto carta a un array
@@ -390,6 +402,9 @@ function repartoCrupier() {
         //Bucle para entregar cartas al crupier, si este llega a +17 el bucle se termina
         let cartaRandom = Math.random() * deck.length-1;
         cartaRandom = Math.round(cartaRandom);
+
+        const music = new Audio('../sound/Cards-6010_56_4_preview.wav');
+        music.play();
 
         let puntosR = 0;
 
@@ -510,6 +525,9 @@ function quienGana() {
 
         document.getElementById('saldoUser').innerHTML = ` U$ ${credito}`
     }
+
+    const music = new Audio('../sound/CasinoChips-6010_66_6_preview.wav');
+    music.play();
 
     //Sacamos de la vista botones de pedir cartas y volvemos a habilitar las apuestas
     document.getElementById("apuestaJugador").style.visibility = "visible"; // show
