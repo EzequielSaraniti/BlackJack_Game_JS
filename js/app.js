@@ -1,5 +1,6 @@
 //Funciones del proyecto
 
+
 //Iniciamos con el usuario guardado
 if (localStorage.getItem("userLog") == "true") {
     nombre = localStorage.getItem("nombreUser")
@@ -10,9 +11,6 @@ if (localStorage.getItem("userLog") == "true") {
     loading()
     document.getElementById("IngresoUser").style.display = "none"; // show
 }
-
-const musicP = new Audio('../sound/musica.mp3');
-musicP.play();
 
 
 
@@ -149,6 +147,9 @@ function loading(){
 
 //FIN Efecto cargando
 function finloading(){
+    
+    musicP.play();
+    musicP.loop =true;
     document.getElementById("load").classList.remove("loader")
     document.getElementById("aparece").style.visibility = "visible"; // show
     document.getElementById("aparece").style.opacity = 1; // show

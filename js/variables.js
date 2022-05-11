@@ -15,6 +15,7 @@ let puntosBanca = [];
 let i = 1;
 let archivo = ""
 let data = []
+const musicP = new Audio('../sound/musica.mp3');
 
 //Variables que interactuan con el HTML
 const btnJugar = document.getElementById('jugar')
