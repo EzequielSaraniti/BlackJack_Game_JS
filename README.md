@@ -1,7 +1,7 @@
 # BlackJack 2.0
 Game created using Javascript, using HTML, CSS, Javascript and some libraries.
 
-![Blackjack Wind](https://media3.giphy.com/media/XQjKHOMbI9weBt0Xzi/giphy.gif?cid=790b7611af6ee45525749265b1b2087781fdfc3d7b53f6fd&rid=giphy.gif&ct=g)
+![Blackjack Wind](https://user-images.githubusercontent.com/38590569/177459264-807bef76-27db-4eae-891c-5fe93729434f.gif)
 
 # Quick liks
 1. [Requirements](#requirements)
